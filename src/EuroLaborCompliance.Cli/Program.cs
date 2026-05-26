@@ -1,41 +1,53 @@
 using EuroLaborCompliance.Pipeline;
+using EuroLaborCompliance.Pipeline.Ocr;
 
 var testDir = FindTestDir();
-var docPath = Path.Combine(testDir, "data", "documents", "tc-001-contract.txt");
+var docsDir = Path.Combine(testDir, "data", "documents");
 var gtPath = Path.Combine(testDir, "data", "ground-truth", "tc-001-setu-output.json");
-var outputDir = Path.Combine(testDir, "..", "output");
-Directory.CreateDirectory(outputDir);
 
-Console.WriteLine("Euro Labor Compliance AI - PoC Pipeline");
+// Find first real PDF
+var pdf = Directory.GetFiles(docsDir, "*.pdf")
+    .OrderBy(f => f.Contains("2026") ? 0 : 1)
+    .FirstOrDefault();
+
+var docPath = pdf ?? Path.Combine(docsDir, "tc-001-contract.txt");
+
+Console.WriteLine("Euro Labor Compliance AI - OCR Pipeline");
 Console.WriteLine("========================================");
 Console.WriteLine();
 
-if (!File.Exists(docPath)) { Console.WriteLine($"[ERROR] Document not found: {docPath}"); return 1; }
+if (!File.Exists(docPath))
+{
+    Console.WriteLine($"[ERROR] File not found: {docPath}");
+    return 1;
+}
 
-Console.WriteLine($"[1/3] Ingesting: {Path.GetFileName(docPath)}");
-var pipeline = new CompliancePipeline();
+Console.WriteLine($"[1/4] OCR: {Path.GetFileName(docPath)} ({new FileInfo(docPath).Length / 1024} KB)");
+
+IOcrService ocr = docPath.EndsWith(".pdf")
+    ? new HuggingFaceOcrService()
+    : new RuleBasedOcrService();
+
+var pipeline = new CompliancePipeline(ocr);
 var result = await pipeline.RunAsync(docPath);
 
-Console.WriteLine($"[2/3] Mapping: confidence={result.MappingConfidence:P0}, mapped={result.FieldsMapped}, missing={result.FieldsMissing}");
+Console.WriteLine($"[2/4] OCR complete: {result.OcrInfo?.Engine}, {result.OcrInfo?.PageCount} pages");
+Console.WriteLine($"[3/4] Mapping: confidence={result.MappingConfidence:P0}, mapped={result.FieldsMapped}");
+
 foreach (var flag in result.Flags)
     Console.WriteLine($"       [{flag.Type}] {flag.Field}: {flag.Message}");
 
-var outputPath = Path.Combine(outputDir, $"output-{DateTime.Now:yyyyMMdd-HHmmss}.json");
+var outputDir = Path.Combine(testDir, "..", "output");
+Directory.CreateDirectory(outputDir);
+var outputPath = Path.Combine(outputDir, $"ocr-output-{DateTime.Now:yyyyMMdd-HHmmss}.json");
 await File.WriteAllTextAsync(outputPath, result.OutputJson);
-Console.WriteLine($"[3/3] Saved: {outputPath}");
+Console.WriteLine($"[4/4] Saved: {outputPath}");
 
 if (File.Exists(gtPath))
 {
-    Console.WriteLine();
     var report = await pipeline.ValidateAgainstGroundTruthAsync(result.OutputJson, gtPath);
-    Console.WriteLine($"Match Score: {report.MatchScore:P0} | Checked: {report.TotalFieldsChecked} | Matched: {report.MatchedFields} | Mismatches: {report.MismatchedFields} | Missing: {report.MissingFields}");
-    Console.WriteLine($"Status: {(report.Passed ? "PASSED" : "FAILED")}");
-
-    foreach (var diff in report.Differences.Take(10))
-        Console.WriteLine($"  {diff.Path}: expected={Trunc(diff.Expected,50)} actual={Trunc(diff.Actual,50)}");
+    Console.WriteLine($"\nMatch Score: {report.MatchScore:P0} | Matched: {report.MatchedFields}/{report.TotalFieldsChecked}");
 }
-else
-    Console.WriteLine("[SKIP] No ground truth file");
 
 Console.WriteLine("\nDone.");
 return 0;
@@ -47,4 +59,3 @@ static string FindTestDir()
         dir = dir.Parent;
     return dir != null ? Path.Combine(dir.FullName, "test") : Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "test");
 }
-static string Trunc(string s, int n) => s.Length <= n ? s : s[..(n - 3)] + "...";

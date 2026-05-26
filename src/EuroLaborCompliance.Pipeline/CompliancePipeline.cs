@@ -1,4 +1,5 @@
 using System.Text.Json;
+using EuroLaborCompliance.Pipeline.Ocr;
 using EuroLaborCompliance.Pipeline.Models;
 
 namespace EuroLaborCompliance.Pipeline;
@@ -9,25 +10,34 @@ public record PipelineResult(
     int FieldsMapped,
     int FieldsMissing,
     List<Mapping.MappingFlag> Flags,
-    string OutputJson
+    string OutputJson,
+    OcrResult? OcrInfo = null
 );
 
 public class CompliancePipeline
 {
-    private readonly Ingestion.DocumentIngestor _ingestor;
+    private readonly IOcrService _ocr;
     private readonly Mapping.SemanticMapper _mapper;
     private readonly Validation.OutputValidator _validator;
 
-    public CompliancePipeline()
+    public CompliancePipeline(IOcrService? ocr = null)
     {
-        _ingestor = new Ingestion.DocumentIngestor();
+        _ocr = ocr ?? new RuleBasedOcrService();
         _mapper = new Mapping.SemanticMapper();
         _validator = new Validation.OutputValidator();
     }
 
     public async Task<PipelineResult> RunAsync(string documentPath)
     {
-        var extracted = await _ingestor.IngestAsync(documentPath);
+        // L1: OCR
+        var ocrResult = await _ocr.ExtractAsync(documentPath);
+        Console.WriteLine($"       OCR: {ocrResult.Engine}, {ocrResult.PageCount} pages, {ocrResult.ProcessingTimeSeconds:F1}s");
+
+        // L2: Ingest OCR output
+        var extracted = new Ingestion.DocumentIngestor().IngestFromMarkdown(
+            ocrResult.Markdown, ocrResult.SourceFile);
+
+        // L3: Map to SETU
         var mapped = _mapper.Map(extracted);
 
         var jsonOptions = new JsonSerializerOptions
@@ -40,7 +50,7 @@ public class CompliancePipeline
 
         return new PipelineResult(
             mapped.Output, mapped.OverallConfidence,
-            mapped.FieldsMapped, mapped.FieldsMissing, mapped.Flags, json
+            mapped.FieldsMapped, mapped.FieldsMissing, mapped.Flags, json, ocrResult
         );
     }
 

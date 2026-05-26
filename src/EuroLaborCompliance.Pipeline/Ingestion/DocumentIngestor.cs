@@ -24,10 +24,15 @@ public class DocumentIngestor
     public async Task<ExtractedDocument> IngestAsync(string filePath)
     {
         var rawText = await File.ReadAllTextAsync(filePath);
-        var fields = ParseStructuredFields(rawText);
+        return IngestFromMarkdown(rawText, Path.GetFileName(filePath));
+    }
+
+    public ExtractedDocument IngestFromMarkdown(string markdown, string sourceFile)
+    {
+        var fields = ParseStructuredFields(markdown);
         return new ExtractedDocument(
-            Path.GetFileName(filePath),
-            rawText,
+            sourceFile,
+            markdown,
             fields,
             new Dictionary<string, double>
             {
