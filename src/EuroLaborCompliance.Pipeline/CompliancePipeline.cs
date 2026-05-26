@@ -1,6 +1,7 @@
 using System.Text.Json;
 using EuroLaborCompliance.Pipeline.Ocr;
 using EuroLaborCompliance.Pipeline.Models;
+using EuroLaborCompliance.Pipeline.Mapping;
 
 namespace EuroLaborCompliance.Pipeline;
 
@@ -9,7 +10,7 @@ public record PipelineResult(
     double MappingConfidence,
     int FieldsMapped,
     int FieldsMissing,
-    List<Mapping.MappingFlag> Flags,
+    List<MappingFlag> Flags,
     string OutputJson,
     OcrResult? OcrInfo = null
 );
@@ -17,13 +18,13 @@ public record PipelineResult(
 public class CompliancePipeline
 {
     private readonly IOcrService _ocr;
-    private readonly Mapping.SemanticMapper _mapper;
+    private readonly IMapper _mapper;
     private readonly Validation.OutputValidator _validator;
 
-    public CompliancePipeline(IOcrService? ocr = null)
+    public CompliancePipeline(IOcrService? ocr = null, IMapper? mapper = null)
     {
         _ocr = ocr ?? new RuleBasedOcrService();
-        _mapper = new Mapping.SemanticMapper();
+        _mapper = mapper ?? new SemanticMapperAdapter();
         _validator = new Validation.OutputValidator();
     }
 
@@ -33,12 +34,8 @@ public class CompliancePipeline
         var ocrResult = await _ocr.ExtractAsync(documentPath);
         Console.WriteLine($"       OCR: {ocrResult.Engine}, {ocrResult.PageCount} pages, {ocrResult.ProcessingTimeSeconds:F1}s");
 
-        // L2: Ingest OCR output
-        var extracted = new Ingestion.DocumentIngestor().IngestFromMarkdown(
-            ocrResult.Markdown, ocrResult.SourceFile);
-
-        // L3: Map to SETU
-        var mapped = _mapper.Map(extracted);
+        // L2: Map (LLM or rule-based, via IMapper)
+        var mapped = await _mapper.MapAsync(ocrResult.Markdown, ocrResult.SourceFile);
 
         var jsonOptions = new JsonSerializerOptions
         {
@@ -58,5 +55,16 @@ public class CompliancePipeline
         string outputJson, string groundTruthPath)
     {
         return await _validator.CompareWithGroundTruthAsync(outputJson, groundTruthPath);
+    }
+}
+
+// Adapter to keep existing SemanticMapper compatible with IMapper
+internal class SemanticMapperAdapter : IMapper
+{
+    private readonly SemanticMapper _legacy = new();
+    public Task<MappingResult> MapAsync(string markdown, string sourceFile)
+    {
+        var doc = new Ingestion.DocumentIngestor().IngestFromMarkdown(markdown, sourceFile);
+        return Task.FromResult(_legacy.Map(doc));
     }
 }

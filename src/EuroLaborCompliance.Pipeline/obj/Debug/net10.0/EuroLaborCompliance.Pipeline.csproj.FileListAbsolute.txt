@@ -1,0 +1,13 @@
+D:\Repos\euro-labor-compliance-ai\src\EuroLaborCompliance.Pipeline\obj\Debug\net10.0\EuroLaborCompliance.Pipeline.csproj.AssemblyReference.cache
+D:\Repos\euro-labor-compliance-ai\src\EuroLaborCompliance.Pipeline\obj\Debug\net10.0\EuroLaborCompliance.Pipeline.GeneratedMSBuildEditorConfig.editorconfig
+D:\Repos\euro-labor-compliance-ai\src\EuroLaborCompliance.Pipeline\obj\Debug\net10.0\EuroLaborCompliance.Pipeline.AssemblyInfoInputs.cache
+D:\Repos\euro-labor-compliance-ai\src\EuroLaborCompliance.Pipeline\obj\Debug\net10.0\EuroLaborCompliance.Pipeline.AssemblyInfo.cs
+D:\Repos\euro-labor-compliance-ai\src\EuroLaborCompliance.Pipeline\obj\Debug\net10.0\EuroLaborCompliance.Pipeline.csproj.CoreCompileInputs.cache
+D:\Repos\euro-labor-compliance-ai\src\EuroLaborCompliance.Pipeline\obj\Debug\net10.0\EuroLaborCompliance.Pipeline.sourcelink.json
+D:\Repos\euro-labor-compliance-ai\src\EuroLaborCompliance.Pipeline\bin\Debug\net10.0\EuroLaborCompliance.Pipeline.deps.json
+D:\Repos\euro-labor-compliance-ai\src\EuroLaborCompliance.Pipeline\bin\Debug\net10.0\EuroLaborCompliance.Pipeline.dll
+D:\Repos\euro-labor-compliance-ai\src\EuroLaborCompliance.Pipeline\bin\Debug\net10.0\EuroLaborCompliance.Pipeline.pdb
+D:\Repos\euro-labor-compliance-ai\src\EuroLaborCompliance.Pipeline\obj\Debug\net10.0\EuroLaborCompliance.Pipeline.dll
+D:\Repos\euro-labor-compliance-ai\src\EuroLaborCompliance.Pipeline\obj\Debug\net10.0\refint\EuroLaborCompliance.Pipeline.dll
+D:\Repos\euro-labor-compliance-ai\src\EuroLaborCompliance.Pipeline\obj\Debug\net10.0\EuroLaborCompliance.Pipeline.pdb
+D:\Repos\euro-labor-compliance-ai\src\EuroLaborCompliance.Pipeline\obj\Debug\net10.0\ref\EuroLaborCompliance.Pipeline.dll

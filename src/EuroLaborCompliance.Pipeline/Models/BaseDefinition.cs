@@ -3,23 +3,23 @@ namespace EuroLaborCompliance.Pipeline.Models;
 public class BaseDefinition
 {
     [JsonPropertyName("baseType")]
-    public required BaseDefinitionCode BaseType { get; init; }
+    public BaseDefinitionCode BaseType { get; set; }
 
     [JsonPropertyName("remunerationIndicator")]
-    public required bool RemunerationIndicator { get; init; }
+    public bool RemunerationIndicator { get; set; }
 
     [JsonPropertyName("holidayAllowanceIndicator")]
-    public required bool HolidayAllowanceIndicator { get; init; }
+    public bool HolidayAllowanceIndicator { get; set; }
 
     [JsonPropertyName("paidLeaveDayIndicator")]
-    public required bool PaidLeaveDayIndicator { get; init; }
+    public bool PaidLeaveDayIndicator { get; set; }
 
     [JsonPropertyName("allAllowancesIndicator")]
-    public required bool AllAllowancesIndicator { get; init; }
+    public bool AllAllowancesIndicator { get; set; }
 
     [JsonPropertyName("allowances")]
-    public AllowanceCode[]? Allowances { get; init; }
+    public AllowanceCode[]? Allowances { get; set; }
 
     [JsonPropertyName("referenceDate")]
-    public string? ReferenceDate { get; init; }
+    public string? ReferenceDate { get; set; }
 }

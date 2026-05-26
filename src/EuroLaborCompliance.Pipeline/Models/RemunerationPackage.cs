@@ -3,92 +3,92 @@ namespace EuroLaborCompliance.Pipeline.Models;
 public class RemunerationPackage
 {
     [JsonPropertyName("origin")]
-    public string? Origin { get; init; }
+    public string? Origin { get; set; }
 
     [JsonPropertyName("effectivePeriod")]
-    public EffectivePeriod? EffectivePeriod { get; init; }
+    public EffectivePeriod? EffectivePeriod { get; set; }
 
     [JsonPropertyName("workDuration")]
-    public WorkDuration? WorkDuration { get; init; }
+    public WorkDuration? WorkDuration { get; set; }
 
     [JsonPropertyName("interval")]
-    public Interval? Interval { get; init; }
+    public Interval? Interval { get; set; }
 
     [JsonPropertyName("hourlyWageConversion")]
-    public Amount? HourlyWageConversion { get; init; }
+    public Amount? HourlyWageConversion { get; set; }
 
     [JsonPropertyName("salaryScale")]
-    public SalaryScale[]? SalaryScale { get; init; }
+    public SalaryScale[]? SalaryScale { get; set; }
 
     [JsonPropertyName("individualSalaryIncrease")]
-    public IndividualSalaryIncrease[]? IndividualSalaryIncrease { get; init; }
+    public IndividualSalaryIncrease[]? IndividualSalaryIncrease { get; set; }
 
     [JsonPropertyName("generalSalaryIncrease")]
-    public GeneralSalaryIncrease[]? GeneralSalaryIncrease { get; init; }
+    public GeneralSalaryIncrease[]? GeneralSalaryIncrease { get; set; }
 
     [JsonPropertyName("conditions")]
-    public Condition[]? Conditions { get; init; }
+    public Condition[]? Conditions { get; set; }
 }
 
 public class SalaryScale
 {
     [JsonPropertyName("name")]
-    public string? Name { get; init; }
+    public string? Name { get; set; }
 
     [JsonPropertyName("minValue")]
-    public double? MinValue { get; init; }
+    public double? MinValue { get; set; }
 
     [JsonPropertyName("maxValue")]
-    public double? MaxValue { get; init; }
+    public double? MaxValue { get; set; }
 
     [JsonPropertyName("currency")]
-    public string? Currency { get; init; }
+    public string? Currency { get; set; }
 
     [JsonPropertyName("salaryStep")]
-    public SalaryScaleStep[]? SalaryStep { get; init; }
+    public SalaryScaleStep[]? SalaryStep { get; set; }
 
     [JsonPropertyName("careerLevel")]
-    public int? CareerLevel { get; init; }
+    public int? CareerLevel { get; set; }
 
     [JsonPropertyName("positionProfileReference")]
-    public PositionProfileReference[]? PositionProfileReference { get; init; }
+    public PositionProfileReference[]? PositionProfileReference { get; set; }
 }
 
 public class SalaryScaleStep
 {
     [JsonPropertyName("name")]
-    public string? Name { get; init; }
+    public string? Name { get; set; }
 
     [JsonPropertyName("value")]
-    public required double Value { get; init; }
+    public double Value { get; set; }
 
     [JsonPropertyName("minimumWage")]
-    public double? MinimumWage { get; init; }
+    public double? MinimumWage { get; set; }
 
     [JsonPropertyName("conditions")]
-    public Condition[]? Conditions { get; init; }
+    public Condition[]? Conditions { get; set; }
 }
 
 public class PositionProfileReference
 {
     [JsonPropertyName("positionId")]
-    public required string PositionId { get; init; }
+    public string PositionId { get; set; }
 }
 
 public class IndividualSalaryIncrease
 {
     [JsonPropertyName("type")]
-    public required string Type { get; init; }
+    public string Type { get; set; }
 
     [JsonPropertyName("percentage")]
-    public double? Percentage { get; init; }
+    public double? Percentage { get; set; }
 }
 
 public class GeneralSalaryIncrease
 {
     [JsonPropertyName("percentage")]
-    public double? Percentage { get; init; }
+    public double? Percentage { get; set; }
 
     [JsonPropertyName("effectivePeriod")]
-    public EffectivePeriod? EffectivePeriod { get; init; }
+    public EffectivePeriod? EffectivePeriod { get; set; }
 }

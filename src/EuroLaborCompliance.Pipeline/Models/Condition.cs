@@ -3,95 +3,95 @@ namespace EuroLaborCompliance.Pipeline.Models;
 public class Condition
 {
     [JsonPropertyName("conditionType")]
-    public required string ConditionType { get; init; }
+    public string ConditionType { get; set; }
 
     [JsonPropertyName("operator")]
-    public string? Operator { get; init; }
+    public string? Operator { get; set; }
 
     [JsonPropertyName("age")]
-    public AgeCondition? Age { get; init; }
+    public AgeCondition? Age { get; set; }
 
     [JsonPropertyName("duration")]
-    public DurationCondition? Duration { get; init; }
+    public DurationCondition? Duration { get; set; }
 
     [JsonPropertyName("referenceDateType")]
-    public string? ReferenceDateType { get; init; }
+    public string? ReferenceDateType { get; set; }
 
     [JsonPropertyName("occurrence")]
-    public Occurrence? Occurrence { get; init; }
+    public Occurrence? Occurrence { get; set; }
 
     [JsonPropertyName("positionProfileIds")]
-    public string[]? PositionProfileIds { get; init; }
+    public string[]? PositionProfileIds { get; set; }
 
     [JsonPropertyName("salaryScale")]
-    public SalaryScaleCondition? SalaryScale { get; init; }
+    public SalaryScaleCondition? SalaryScale { get; set; }
 
     [JsonPropertyName("step")]
-    public StepCondition? Step { get; init; }
+    public StepCondition? Step { get; set; }
 
     [JsonPropertyName("description")]
-    public string? Description { get; init; }
+    public string? Description { get; set; }
 
     [JsonPropertyName("conditions")]
-    public Condition[]? Conditions { get; init; }
+    public Condition[]? Conditions { get; set; }
 
     [JsonPropertyName("not")]
-    public Condition? Not { get; init; }
+    public Condition? Not { get; set; }
 }
 
 public class AgeCondition
 {
     [JsonPropertyName("minimumAge")]
-    public double? MinimumAge { get; init; }
+    public double? MinimumAge { get; set; }
 
     [JsonPropertyName("maximumAge")]
-    public double? MaximumAge { get; init; }
+    public double? MaximumAge { get; set; }
 }
 
 public class DurationCondition
 {
     [JsonPropertyName("value")]
-    public double? Value { get; init; }
+    public double? Value { get; set; }
 
     [JsonPropertyName("unitCode")]
-    public IntervalCode? UnitCode { get; init; }
+    public IntervalCode? UnitCode { get; set; }
 }
 
 public class SalaryScaleCondition
 {
     [JsonPropertyName("salaryScaleName")]
-    public string? SalaryScaleName { get; init; }
+    public string? SalaryScaleName { get; set; }
 
     [JsonPropertyName("stepName")]
-    public string? StepName { get; init; }
+    public string? StepName { get; set; }
 }
 
 public class StepCondition
 {
     [JsonPropertyName("stepValue")]
-    public required double StepValue { get; init; }
+    public double StepValue { get; set; }
 
     [JsonPropertyName("positionProfileReference")]
-    public PositionProfileReference[]? PositionProfileReference { get; init; }
+    public PositionProfileReference[]? PositionProfileReference { get; set; }
 }
 
 public class Occurrence
 {
     [JsonPropertyName("occurrenceType")]
-    public string? OccurrenceType { get; init; }
+    public string? OccurrenceType { get; set; }
 
     [JsonPropertyName("date")]
-    public string? Date { get; init; }
+    public string? Date { get; set; }
 
     [JsonPropertyName("recurringInterval")]
-    public Interval? RecurringInterval { get; init; }
+    public Interval? RecurringInterval { get; set; }
 
     [JsonPropertyName("event")]
-    public string? Event { get; init; }
+    public string? Event { get; set; }
 
     [JsonPropertyName("offset")]
-    public int? Offset { get; init; }
+    public int? Offset { get; set; }
 
     [JsonPropertyName("eventName")]
-    public string? EventName { get; init; }
+    public string? EventName { get; set; }
 }

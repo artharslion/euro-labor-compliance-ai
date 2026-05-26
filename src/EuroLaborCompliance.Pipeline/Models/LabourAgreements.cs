@@ -3,41 +3,41 @@ namespace EuroLaborCompliance.Pipeline.Models;
 public class LabourAgreements
 {
     [JsonPropertyName("industryIdentifier")]
-    public Identifier[]? IndustryIdentifier { get; init; }
+    public Identifier[]? IndustryIdentifier { get; set; }
 
     [JsonPropertyName("collectiveLabourAgreement")]
-    public LabourAgreement? CollectiveLabourAgreement { get; init; }
+    public LabourAgreement? CollectiveLabourAgreement { get; set; }
 
     [JsonPropertyName("customLabourAgreement")]
-    public LabourAgreement? CustomLabourAgreement { get; init; }
+    public LabourAgreement? CustomLabourAgreement { get; set; }
 }
 
 public class LabourAgreement
 {
     [JsonPropertyName("name")]
-    public string? Name { get; init; }
+    public string? Name { get; set; }
 
     [JsonPropertyName("typeCode")]
-    public required LabourAgreementType TypeCode { get; init; }
+    public LabourAgreementType TypeCode { get; set; }
 
     [JsonPropertyName("effectivePeriod")]
-    public EffectivePeriod? EffectivePeriod { get; init; }
+    public EffectivePeriod? EffectivePeriod { get; set; }
 }
 
 public class PositionProfile
 {
     [JsonPropertyName("positionId")]
-    public string? PositionId { get; init; }
+    public string? PositionId { get; set; }
 
     [JsonPropertyName("positionTitle")]
-    public string? PositionTitle { get; init; }
+    public string? PositionTitle { get; set; }
 
     [JsonPropertyName("origin")]
-    public string? Origin { get; init; }
+    public string? Origin { get; set; }
 
     [JsonPropertyName("referenceTitle")]
-    public string? ReferenceTitle { get; init; }
+    public string? ReferenceTitle { get; set; }
 
     [JsonPropertyName("workDescription")]
-    public string? WorkDescription { get; init; }
+    public string? WorkDescription { get; set; }
 }

@@ -19,8 +19,14 @@ public record MappingFlag(
     List<string>? Alternatives = null
 );
 
-public class SemanticMapper
+public class SemanticMapper : IMapper
 {
+    public Task<MappingResult> MapAsync(string markdown, string sourceFile)
+    {
+        var doc = new Ingestion.DocumentIngestor().IngestFromMarkdown(markdown, sourceFile);
+        return Task.FromResult(Map(doc));
+    }
+
     public MappingResult Map(ExtractedDocument document)
     {
         var flags = new List<MappingFlag>();

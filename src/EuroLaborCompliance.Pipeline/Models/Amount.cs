@@ -3,59 +3,59 @@ namespace EuroLaborCompliance.Pipeline.Models;
 public class Amount
 {
     [JsonPropertyName("value")]
-    public required double Value { get; init; }
+    public double Value { get; set; }
 
     [JsonPropertyName("minValue")]
-    public double? MinValue { get; init; }
+    public double? MinValue { get; set; }
 
     [JsonPropertyName("maxValue")]
-    public double? MaxValue { get; init; }
+    public double? MaxValue { get; set; }
 
     [JsonPropertyName("unitCode")]
-    public required AmountUnitCode UnitCode { get; init; }
+    public AmountUnitCode UnitCode { get; set; }
 
     [JsonPropertyName("baseAmount")]
-    public BaseAmount? BaseAmount { get; init; }
+    public BaseAmount? BaseAmount { get; set; }
 
     [JsonPropertyName("proportional")]
-    public Proportional? Proportional { get; init; }
+    public Proportional? Proportional { get; set; }
 }
 
 public class BaseAmount
 {
     [JsonPropertyName("unitCode")]
-    public required BaseUnitCode UnitCode { get; init; }
+    public BaseUnitCode UnitCode { get; set; }
 
     [JsonPropertyName("baseType")]
-    public required BaseDefinitionCode BaseType { get; init; }
+    public BaseDefinitionCode BaseType { get; set; }
 
     [JsonPropertyName("value")]
-    public double? Value { get; init; }
+    public double? Value { get; set; }
 
     [JsonPropertyName("minValue")]
-    public double? MinValue { get; init; }
+    public double? MinValue { get; set; }
 
     [JsonPropertyName("maxValue")]
-    public double? MaxValue { get; init; }
+    public double? MaxValue { get; set; }
 }
 
 public class Proportional
 {
     [JsonPropertyName("partTimePercentage")]
-    public double? PartTimePercentage { get; init; }
+    public double? PartTimePercentage { get; set; }
 
     [JsonPropertyName("employmentDuration")]
-    public double? EmploymentDuration { get; init; }
+    public double? EmploymentDuration { get; set; }
 
     [JsonPropertyName("description")]
-    public string? Description { get; init; }
+    public string? Description { get; set; }
 }
 
 public class Interval
 {
     [JsonPropertyName("value")]
-    public required double Value { get; init; }
+    public double Value { get; set; }
 
     [JsonPropertyName("unitCode")]
-    public required IntervalCode UnitCode { get; init; }
+    public IntervalCode UnitCode { get; set; }
 }

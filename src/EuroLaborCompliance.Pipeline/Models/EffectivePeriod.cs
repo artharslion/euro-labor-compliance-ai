@@ -3,8 +3,8 @@ namespace EuroLaborCompliance.Pipeline.Models;
 public class EffectivePeriod
 {
     [JsonPropertyName("validFrom")]
-    public required string ValidFrom { get; init; }
+    public string ValidFrom { get; set; }
 
     [JsonPropertyName("validTo")]
-    public string? ValidTo { get; init; }
+    public string? ValidTo { get; set; }
 }

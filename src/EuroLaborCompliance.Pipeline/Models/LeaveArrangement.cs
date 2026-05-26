@@ -3,125 +3,125 @@ namespace EuroLaborCompliance.Pipeline.Models;
 public class LeaveArrangement
 {
     [JsonPropertyName("id")]
-    public required string Id { get; init; }
+    public string Id { get; set; }
 
     [JsonPropertyName("name")]
-    public string? Name { get; init; }
+    public string? Name { get; set; }
 
     [JsonPropertyName("origin")]
-    public string? Origin { get; init; }
+    public string? Origin { get; set; }
 
     [JsonPropertyName("effectivePeriod")]
-    public EffectivePeriod? EffectivePeriod { get; init; }
+    public EffectivePeriod? EffectivePeriod { get; set; }
 
     [JsonPropertyName("paidLeave")]
-    public PaidLeave[]? PaidLeave { get; init; }
+    public PaidLeave[]? PaidLeave { get; set; }
 
     [JsonPropertyName("holidays")]
-    public Holiday[]? Holidays { get; init; }
+    public Holiday[]? Holidays { get; set; }
 
     [JsonPropertyName("specialLeave")]
-    public SpecialLeave[]? SpecialLeave { get; init; }
+    public SpecialLeave[]? SpecialLeave { get; set; }
 
     [JsonPropertyName("additionalParentalLeave")]
-    public AdditionalParentalLeave[]? AdditionalParentalLeave { get; init; }
+    public AdditionalParentalLeave[]? AdditionalParentalLeave { get; set; }
 
     [JsonPropertyName("mandatoryLeaveAllocation")]
-    public MandatoryLeaveAllocation? MandatoryLeaveAllocation { get; init; }
+    public MandatoryLeaveAllocation? MandatoryLeaveAllocation { get; set; }
 
     [JsonPropertyName("description")]
-    public string? Description { get; init; }
+    public string? Description { get; set; }
 }
 
 public class PaidLeave
 {
     [JsonPropertyName("leaveType")]
-    public required string LeaveType { get; init; }
+    public string LeaveType { get; set; }
 
     [JsonPropertyName("leaveQuantity")]
-    public Amount? LeaveQuantity { get; init; }
+    public Amount? LeaveQuantity { get; set; }
 
     [JsonPropertyName("leaveMeasurement")]
-    public string? LeaveMeasurement { get; init; }
+    public string? LeaveMeasurement { get; set; }
 }
 
 public class Holiday
 {
     [JsonPropertyName("holidayCode")]
-    public string? HolidayCode { get; init; }
+    public string? HolidayCode { get; set; }
 
     [JsonPropertyName("description")]
-    public string? Description { get; init; }
+    public string? Description { get; set; }
 }
 
 public class SpecialLeave
 {
     [JsonPropertyName("leaveType")]
-    public required string LeaveType { get; init; }
+    public string LeaveType { get; set; }
 
     [JsonPropertyName("leaveQuantity")]
-    public Amount? LeaveQuantity { get; init; }
+    public Amount? LeaveQuantity { get; set; }
 }
 
 public class AdditionalParentalLeave
 {
     [JsonPropertyName("leaveType")]
-    public required string LeaveType { get; init; }
+    public string LeaveType { get; set; }
 
     [JsonPropertyName("leaveQuantity")]
-    public Amount? LeaveQuantity { get; init; }
+    public Amount? LeaveQuantity { get; set; }
 
     [JsonPropertyName("conditions")]
-    public Condition[]? Conditions { get; init; }
+    public Condition[]? Conditions { get; set; }
 }
 
 public class MandatoryLeaveAllocation
 {
     [JsonPropertyName("allocationType")]
-    public required string AllocationType { get; init; }
+    public string AllocationType { get; set; }
 
     [JsonPropertyName("allocationQuantity")]
-    public Amount? AllocationQuantity { get; init; }
+    public Amount? AllocationQuantity { get; set; }
 }
 
 public class PensionArrangement
 {
     [JsonPropertyName("id")]
-    public required string Id { get; init; }
+    public string Id { get; set; }
 
     [JsonPropertyName("name")]
-    public string? Name { get; init; }
+    public string? Name { get; set; }
 
     [JsonPropertyName("origin")]
-    public string? Origin { get; init; }
+    public string? Origin { get; set; }
 
     [JsonPropertyName("effectivePeriod")]
-    public EffectivePeriod? EffectivePeriod { get; init; }
+    public EffectivePeriod? EffectivePeriod { get; set; }
 
     [JsonPropertyName("line")]
-    public PensionLine[]? Line { get; init; }
+    public PensionLine[]? Line { get; set; }
 
     [JsonPropertyName("franchise")]
-    public Amount? Franchise { get; init; }
+    public Amount? Franchise { get; set; }
 
     [JsonPropertyName("description")]
-    public string? Description { get; init; }
+    public string? Description { get; set; }
 }
 
 public class PensionLine
 {
     [JsonPropertyName("lineId")]
-    public required string LineId { get; init; }
+    public string LineId { get; set; }
 
     [JsonPropertyName("amount")]
-    public required Amount Amount { get; init; }
+    public Amount Amount { get; set; }
 
     [JsonPropertyName("interval")]
-    public Interval? Interval { get; init; }
+    public Interval? Interval { get; set; }
 
     [JsonPropertyName("conditions")]
-    public Condition[]? Conditions { get; init; }
+    public Condition[]? Conditions { get; set; }
 
     [JsonPropertyName("contributionSource")]
-    public ContributionSource? ContributionSource { get; init; }
+    public ContributionSource? ContributionSource { get; set; }
 }
