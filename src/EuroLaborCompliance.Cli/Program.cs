@@ -38,6 +38,15 @@ var outputPath = Path.Combine(outputDir, $"llm-output-{DateTime.Now:yyyyMMdd-HHm
 await File.WriteAllTextAsync(outputPath, result.OutputJson);
 Console.WriteLine($"[3/4] Saved: {outputPath}");
 
+// Generate Smart Form HTML
+var formGen = new EuroLaborCompliance.Pipeline.SmartForm.SmartFormGenerator();
+var mappingResult = new EuroLaborCompliance.Pipeline.Mapping.MappingResult(result.Output, result.MappingConfidence, result.FieldsMapped, result.FieldsMissing, result.Flags);
+var form = formGen.Generate(result.Output, mappingResult, Path.GetFileName(docPath));
+var html = formGen.ToHtml(form);
+var htmlPath = Path.Combine(outputDir, $"smartform-{DateTime.Now:yyyyMMdd-HHmmss}.html");
+await File.WriteAllTextAsync(htmlPath, html);
+Console.WriteLine($"       Smart Form: {htmlPath}");
+
 if (File.Exists(gtPath))
 {
     var report = await pipeline.ValidateAgainstGroundTruthAsync(result.OutputJson, gtPath);
