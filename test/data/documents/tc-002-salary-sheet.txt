@@ -1,0 +1,168 @@
+====================================================================
+SALARISADMINISTRATIE & BELONINGSSTRUCTUUR
+Salary Administration & Remuneration Structure
+====================================================================
+
+Document ID: TC-002
+Language: nl-NL
+Opdrachtgever: LogiFlex Distributie BV
+KvK: 67890123
+Geldig vanaf: 2026-01-01 tot 2027-12-31
+
+====================================================================
+SECTOR & CAO INFORMATIE
+====================================================================
+
+Sector (CBS SBI 2008): 52 — Opslag en vervoer (Warehousing & Transport)
+Collectieve Arbeidsovereenkomst: LogiFlex Eigen Arbeidsvoorwaardenregeling
+CAO Status: Eigen regeling (Custom Labour Agreement), niet AVP
+
+====================================================================
+FUNCTIEPROFIELEN (Position Profiles)
+====================================================================
+
+Functie 1:
+  ID: MAG-02
+  Titel: Magazijnmedewerker
+  Referentie CAO: Functiegroep 4 ABU
+  Omschrijving: Orderpicken, goederenverwerking, voorraadbeheer,
+    werken met handscanner en reachtruck.
+
+Functie 2:
+  ID: MAG-05
+  Titel: Senior Magazijnmedewerker / Teamleider
+  Referentie CAO: Functiegroep 5 ABU
+  Omschrijving: Coördinatie magazijnploeg, planning werkzaamheden,
+    kwaliteitscontrole uitgaande goederen, inwerken nieuwe medewerkers.
+
+====================================================================
+SALARISSCHALEN (Salary Scales)
+====================================================================
+
+--- Salarisschaal A: Magazijnmedewerker (MAG-02) ---
+Normale arbeidsduur: 38 uur / week
+Valuta: EUR
+
++--------+---------------------------+------------------+------------------+
+| Trede  | Omschrijving              | Bruto Uurloon    | Voorwaarden      |
++--------+---------------------------+------------------+------------------+
+| 0      | Jeugd <18 jaar            | €  7,36          | Leeftijd < 18    |
+| 1      | Jeugd 18-19 jaar          | €  8,83          | Leeftijd 18-19   |
+| 2      | Jeugd 20 jaar             | € 11,77          | Leeftijd 20      |
+| 3      | Volwassen (instap)        | € 15,31          | Leeftijd >= 21   |
+| 4      | 1 jaar in dienst          | € 15,65          | Dienstjaren >= 1 |
+| 5      | 2 jaar in dienst          | € 16,01          | Dienstjaren >= 2 |
+| 6      | Maximum trede             | € 16,37          | Dienstjaren >= 3 |
++--------+---------------------------+------------------+------------------+
+
+Jaarlijkse periodieke verhoging: 2,25%
+
+--- Salarisschaal B: Senior / Teamleider (MAG-05) ---
+Normale arbeidsduur: 38 uur / week
+Valuta: EUR
+
++--------+---------------------------+------------------+------------------+
+| Trede  | Omschrijving              | Bruto Uurloon    | Voorwaarden      |
++--------+---------------------------+------------------+------------------+
+| 0      | Instap teamleider         | € 17,50          | Leeftijd >= 21   |
+| 1      | 1 jaar als teamleider     | € 17,89          | Dienstjaren >= 1 |
+| 2      | 2 jaar als teamleider     | € 18,30          | Dienstjaren >= 2 |
+| 3      | Maximum teamleider        | € 18,71          | Dienstjaren >= 3 |
++--------+---------------------------+------------------+------------------+
+
+====================================================================
+TOESLAGENMATRIX (Allowance Matrix)
+====================================================================
+
++------------------+--------+-----------+-----------+----------+-----------+
+| Toeslag          | Code   | Tarief    | Eenheid   | Basis    | Conditie  |
++------------------+--------+-----------+-----------+----------+-----------+
+| Overwerk ma-za   | HT101  | 150%      | Percentage| Uurloon  | >38u/week |
+| Overwerk zon     | HT102  | 200%      | Percentage| Uurloon  | zondag    |
+| Onregelmatig     | HT201  | 35%       | Percentage| Uurloon  | 18:00-06:00|
+| Weekend          | HT321  | 50%       | Percentage| Uurloon  | za & zo   |
+| Zaterdag         | HT322  | 40%       | Percentage| Uurloon  | zaterdag  |
+| Zondag           | HT330  | 75%       | Percentage| Uurloon  | zondag    |
+| Nacht (23-06)    | HT340  | 40%       | Percentage| Uurloon  | 23:00-06:00|
+| Feestdag         | HT331  | 100%      | Percentage| Uurloon  | feestdag  |
+| Gevaarlijk werk  | HT600  | 25%       | Percentage| Uurloon  | rangeerzone|
++------------------+--------+-----------+-----------+----------+-----------+
+
+====================================================================
+VERGOEDINGEN (Reimbursements / Compensations)
+====================================================================
+
++------------------+--------+-----------+-----------+----------+
+| Vergoeding       | Code   | Bedrag    | Eenheid   | Interval |
++------------------+--------+-----------+-----------+----------+
+| Reiskosten w-w   | EA103  | € 0,23    | Kilometer | Per km   |
+| Thuiswerk        | EA801  | € 2,35    | Euro      | Per dag  |
+| Internet         | EA606  | € 25,00   | Euro      | Per maand|
+| Telefoon         | EA605  | € 15,00   | Euro      | Per maand|
++------------------+--------+-----------+-----------+----------+
+
+Reiskosten: max 50 km enkele reis (100 km retour) per dag.
+
+====================================================================
+VERLOFREGELINGEN (Leave Arrangements)
+====================================================================
+
+Vakantiedagen: 25 dagen per jaar (bij fulltime 38u/week)
+Wettelijk minimum: 20 dagen (160 uur)
+Bovenwettelijk: 5 dagen (40 uur)
+
+Feestdagen (erkend, doorbetaald):
+  1. Nieuwjaarsdag (1 januari)
+  2. Tweede Paasdag
+  3. Koningsdag (27 april)
+  4. Hemelvaartsdag
+  5. Tweede Pinksterdag
+  6. Eerste Kerstdag (25 december)
+  7. Tweede Kerstdag (26 december)
+
+Bijzonder verlof:
+  - Huwelijk: 2 dagen
+  - Overlijden partner/kind/ouder: 4 dagen
+  - Verhuizing: 1 dag
+  - Geboorte partner: 5 dagen (aanvullend geboorteverlof)
+
+Ouderschapsverlof (aanvullend):
+  - 9 weken betaald (70% dagloon, UWV)
+  - Werkgever vult aan tot 100%: 3 dagen extra
+
+====================================================================
+ZIEKTEVERZUIM (Sick Leave)
+====================================================================
+
+Wachtdagen: 0 (geen)
+Jaar 1: 100% brutoloon
+Jaar 2: 70% brutoloon
+
+====================================================================
+PENSIOEN (Pension — StiPP 2026)
+====================================================================
+
+Totaal premie: 23,4%
+  - Werkgever: 15,9%
+  - Werknemer: 7,5%
+Franchise: € 9,24 per uur
+Maximum pensioengevend loon: € 42,42 per uur
+Deelname: vanaf 18 jaar, eerste werkdag
+
+====================================================================
+OVERIGE REGELINGEN
+====================================================================
+
+IKB: Niet van toepassing (de opdrachtgever kent geen IKB-regeling)
+
+Opleidingsbudget: € 500 per medewerker per jaar
+  - Type: Education (duurzame inzetbaarheid)
+  - Besteding: vakopleidingen, veiligheid, taal
+
+Eindejaarsuitkering / 13e maand: Geen
+
+Winstuitkering: Afhankelijk van bedrijfsresultaat, max 5% van jaarsalaris
+
+====================================================================
+EINDE SALARISADMINISTRATIE
+====================================================================

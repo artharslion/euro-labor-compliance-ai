@@ -1,0 +1,484 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TC-002 Ground Truth — SETU Inquiry Pay Equity v2.0",
+  "description": "Expected output for multi-scale salary administration sheet at LogiFlex Distributie BV. Covers two position profiles (MAG-02 and MAG-05), nine allowances, reimbursements, and a full salary scale matrix with age/tenure conditions.",
+  "documentId": {
+    "value": "660f9501-f30c-52e5-b827-557766552112",
+    "schemeAgencyId": "Customer"
+  },
+  "versionId": {
+    "value": "v1.0"
+  },
+  "issued": "2026-01-15T14:00:00Z",
+  "effectivePeriod": {
+    "validFrom": "2026-01-01",
+    "validTo": "2027-12-31"
+  },
+  "customer": {
+    "id": [
+      {
+        "value": "67890123",
+        "schemeAgencyId": "Customer"
+      }
+    ],
+    "name": "LogiFlex Distributie BV",
+    "legalId": [
+      {
+        "value": "67890123",
+        "schemeAgencyId": "KvK"
+      }
+    ]
+  },
+  "labourAgreements": {
+    "industryIdentifier": [
+      {
+        "value": "52"
+      }
+    ],
+    "customLabourAgreement": true
+  },
+  "baseDefinition": [
+    {
+      "baseType": "GrossSalary",
+      "remunerationIndicator": true,
+      "holidayAllowanceIndicator": true,
+      "paidLeaveDayIndicator": true,
+      "allAllowancesIndicator": true
+    }
+  ],
+  "positionProfile": [
+    {
+      "positionId": {
+        "value": "MAG-02"
+      },
+      "positionTitle": "Magazijnmedewerker",
+      "origin": {
+        "type": "CustomLabourAgreement"
+      },
+      "referenceTitle": "Functiegroep 4 ABU",
+      "workDescription": "Orderpicken, goederenverwerking, voorraadbeheer, werken met handscanner en reachtruck."
+    },
+    {
+      "positionId": {
+        "value": "MAG-05"
+      },
+      "positionTitle": "Senior Magazijnmedewerker / Teamleider",
+      "origin": {
+        "type": "CustomLabourAgreement"
+      },
+      "referenceTitle": "Functiegroep 5 ABU",
+      "workDescription": "Coördinatie magazijnploeg, planning werkzaamheden, kwaliteitscontrole uitgaande goederen, inwerken nieuwe medewerkers."
+    }
+  ],
+  "remuneration": [
+    {
+      "origin": {
+        "type": "CustomLabourAgreement"
+      },
+      "effectivePeriod": {
+        "validFrom": "2026-01-01",
+        "validTo": "2027-12-31"
+      },
+      "workDuration": {
+        "amount": {
+          "value": 38,
+          "unitCode": "Hour"
+        },
+        "interval": {
+          "value": 1,
+          "unitCode": "Week"
+        },
+        "valuePerWeek": 38
+      },
+      "interval": {
+        "value": 1,
+        "unitCode": "Hour"
+      },
+      "hourlyWageConversion": {
+        "hourlyWageFactor": 173.33
+      },
+      "salaryScale": [
+        {
+          "name": "Schaal A — Magazijnmedewerker",
+          "minValue": 7.36,
+          "maxValue": 16.37,
+          "currency": "EUR",
+          "salaryStep": [
+            {
+              "name": "Trede 0",
+              "value": 7.36,
+              "minimumWage": true,
+              "conditions": [
+                {
+                  "conditionType": "Age",
+                  "operator": "lt",
+                  "age": 18
+                }
+              ]
+            },
+            {
+              "name": "Trede 1",
+              "value": 8.83,
+              "minimumWage": true,
+              "conditions": [
+                {
+                  "conditionType": "Age",
+                  "operator": "gte",
+                  "age": 18
+                },
+                {
+                  "conditionType": "Age",
+                  "operator": "lt",
+                  "age": 20
+                }
+              ]
+            },
+            {
+              "name": "Trede 2",
+              "value": 11.77,
+              "minimumWage": true,
+              "conditions": [
+                {
+                  "conditionType": "Age",
+                  "operator": "eq",
+                  "age": 20
+                }
+              ]
+            },
+            {
+              "name": "Trede 3",
+              "value": 15.31,
+              "minimumWage": false,
+              "conditions": [
+                {
+                  "conditionType": "Age",
+                  "operator": "gte",
+                  "age": 21
+                }
+              ]
+            },
+            {
+              "name": "Trede 4",
+              "value": 15.65,
+              "minimumWage": false,
+              "conditions": [
+                {
+                  "conditionType": "AllOf",
+                  "conditions": [
+                    {
+                      "conditionType": "Age",
+                      "operator": "gte",
+                      "age": 21
+                    },
+                    {
+                      "conditionType": "EmploymentDuration",
+                      "operator": "gte",
+                      "duration": "P1Y",
+                      "referenceDateType": "HireDate"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Trede 5",
+              "value": 16.01,
+              "minimumWage": false,
+              "conditions": [
+                {
+                  "conditionType": "AllOf",
+                  "conditions": [
+                    {
+                      "conditionType": "Age",
+                      "operator": "gte",
+                      "age": 21
+                    },
+                    {
+                      "conditionType": "EmploymentDuration",
+                      "operator": "gte",
+                      "duration": "P2Y",
+                      "referenceDateType": "HireDate"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Trede 6",
+              "value": 16.37,
+              "minimumWage": false,
+              "conditions": [
+                {
+                  "conditionType": "AllOf",
+                  "conditions": [
+                    {
+                      "conditionType": "Age",
+                      "operator": "gte",
+                      "age": 21
+                    },
+                    {
+                      "conditionType": "EmploymentDuration",
+                      "operator": "gte",
+                      "duration": "P3Y",
+                      "referenceDateType": "HireDate"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "positionProfileReference": [
+            {
+              "positionId": {
+                "value": "MAG-02"
+              },
+              "startSalaryStep": "Trede 3"
+            }
+          ]
+        },
+        {
+          "name": "Schaal B — Senior / Teamleider",
+          "minValue": 17.50,
+          "maxValue": 18.71,
+          "currency": "EUR",
+          "salaryStep": [
+            {
+              "name": "Trede 0",
+              "value": 17.50,
+              "conditions": [
+                {
+                  "conditionType": "Age",
+                  "operator": "gte",
+                  "age": 21
+                }
+              ]
+            },
+            {
+              "name": "Trede 1",
+              "value": 17.89,
+              "conditions": [
+                {
+                  "conditionType": "AllOf",
+                  "conditions": [
+                    {
+                      "conditionType": "Age",
+                      "operator": "gte",
+                      "age": 21
+                    },
+                    {
+                      "conditionType": "EmploymentDuration",
+                      "operator": "gte",
+                      "duration": "P1Y",
+                      "referenceDateType": "HireDate"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Trede 2",
+              "value": 18.30,
+              "conditions": [
+                {
+                  "conditionType": "AllOf",
+                  "conditions": [
+                    {
+                      "conditionType": "Age",
+                      "operator": "gte",
+                      "age": 21
+                    },
+                    {
+                      "conditionType": "EmploymentDuration",
+                      "operator": "gte",
+                      "duration": "P2Y",
+                      "referenceDateType": "HireDate"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Trede 3",
+              "value": 18.71,
+              "conditions": [
+                {
+                  "conditionType": "AllOf",
+                  "conditions": [
+                    {
+                      "conditionType": "Age",
+                      "operator": "gte",
+                      "age": 21
+                    },
+                    {
+                      "conditionType": "EmploymentDuration",
+                      "operator": "gte",
+                      "duration": "P3Y",
+                      "referenceDateType": "HireDate"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "positionProfileReference": [
+            {
+              "positionId": {
+                "value": "MAG-05"
+              },
+              "startSalaryStep": "Trede 0",
+              "description": "Instap als teamleider vereist aantoonbare ervaring in magazijnwerk."
+            }
+          ]
+        }
+      ],
+      "individualSalaryIncrease": [
+        {
+          "effectiveDate": {
+            "occurrenceType": "Recurring",
+            "recurringInterval": "R/2026-1/P1Y"
+          },
+          "line": {
+            "amount": {
+              "value": 2.25,
+              "unitCode": "Percentage",
+              "baseAmount": {
+                "unitCode": "HourlyRate",
+                "baseType": "GrossSalary"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "allowance": [
+    {
+      "id": { "value": "ALL-OT-101", "schemeAgencyId": "Customer" },
+      "name": "Overwerk maandag-zaterdag",
+      "origin": { "type": "CustomLabourAgreement" },
+      "typeCode": "HT101",
+      "line": [{
+        "lineId": { "value": "OT101-1" },
+        "amount": { "value": 150, "unitCode": "Percentage", "baseAmount": { "unitCode": "HourlyRate", "baseType": "GrossSalary" }},
+        "interval": { "value": 1, "unitCode": "Hour" }
+      }]
+    },
+    {
+      "id": { "value": "ALL-OT-102", "schemeAgencyId": "Customer" },
+      "name": "Overwerk zondag",
+      "origin": { "type": "CustomLabourAgreement" },
+      "typeCode": "HT102",
+      "line": [{
+        "lineId": { "value": "OT102-1" },
+        "amount": { "value": 200, "unitCode": "Percentage", "baseAmount": { "unitCode": "HourlyRate", "baseType": "GrossSalary" }},
+        "interval": { "value": 1, "unitCode": "Hour" }
+      }]
+    },
+    {
+      "id": { "value": "ALL-IR-201", "schemeAgencyId": "Customer" },
+      "name": "Toeslag onregelmatige uren maandag-zaterdag",
+      "origin": { "type": "CustomLabourAgreement" },
+      "typeCode": "HT201",
+      "period": [{ "timePeriod": { "start": "18:00:00", "end": "06:00:00" }, "weekday": ["Monday","Tuesday","Wednesday","Thursday","Friday"] }],
+      "line": [{
+        "lineId": { "value": "IR201-1" },
+        "amount": { "value": 35, "unitCode": "Percentage", "baseAmount": { "unitCode": "HourlyRate", "baseType": "GrossSalary" }},
+        "interval": { "value": 1, "unitCode": "Hour" }
+      }]
+    },
+    {
+      "id": { "value": "ALL-WE-321", "schemeAgencyId": "Customer" },
+      "name": "Weekendtoeslag",
+      "origin": { "type": "CustomLabourAgreement" },
+      "typeCode": "HT321",
+      "period": [{ "timePeriod": { "start": "00:00:00", "end": "23:59:59" }, "weekday": ["Saturday","Sunday"] }],
+      "line": [{
+        "lineId": { "value": "WE321-1" },
+        "amount": { "value": 50, "unitCode": "Percentage", "baseAmount": { "unitCode": "HourlyRate", "baseType": "GrossSalary" }},
+        "interval": { "value": 1, "unitCode": "Hour" }
+      }]
+    },
+    {
+      "id": { "value": "ALL-SA-322", "schemeAgencyId": "Customer" },
+      "name": "Zaterdagtoeslag",
+      "origin": { "type": "CustomLabourAgreement" },
+      "typeCode": "HT322",
+      "period": [{ "timePeriod": { "start": "00:00:00", "end": "23:59:59" }, "weekday": ["Saturday"] }],
+      "line": [{
+        "lineId": { "value": "SA322-1" },
+        "amount": { "value": 40, "unitCode": "Percentage", "baseAmount": { "unitCode": "HourlyRate", "baseType": "GrossSalary" }},
+        "interval": { "value": 1, "unitCode": "Hour" }
+      }]
+    },
+    {
+      "id": { "value": "ALL-SU-330", "schemeAgencyId": "Customer" },
+      "name": "Zondagtoeslag",
+      "origin": { "type": "CustomLabourAgreement" },
+      "typeCode": "HT330",
+      "period": [{ "timePeriod": { "start": "00:00:00", "end": "23:59:59" }, "weekday": ["Sunday"] }],
+      "line": [{
+        "lineId": { "value": "SU330-1" },
+        "amount": { "value": 75, "unitCode": "Percentage", "baseAmount": { "unitCode": "HourlyRate", "baseType": "GrossSalary" }},
+        "interval": { "value": 1, "unitCode": "Hour" }
+      }]
+    },
+    {
+      "id": { "value": "ALL-NT-340", "schemeAgencyId": "Customer" },
+      "name": "Nachtdiensttoeslag",
+      "origin": { "type": "CustomLabourAgreement" },
+      "typeCode": "HT340",
+      "period": [{ "timePeriod": { "start": "23:00:00", "end": "06:00:00" }, "weekday": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"] }],
+      "line": [{
+        "lineId": { "value": "NT340-1" },
+        "amount": { "value": 40, "unitCode": "Percentage", "baseAmount": { "unitCode": "HourlyRate", "baseType": "GrossSalary" }},
+        "interval": { "value": 1, "unitCode": "Hour" }
+      }]
+    },
+    {
+      "id": { "value": "ALL-FT-331", "schemeAgencyId": "Customer" },
+      "name": "Feestdagtoeslag",
+      "origin": { "type": "CustomLabourAgreement" },
+      "typeCode": "HT331",
+      "line": [{
+        "lineId": { "value": "FT331-1" },
+        "amount": { "value": 100, "unitCode": "Percentage", "baseAmount": { "unitCode": "HourlyRate", "baseType": "GrossSalary" }},
+        "interval": { "value": 1, "unitCode": "Hour" }
+      }]
+    },
+    {
+      "id": { "value": "ALL-HZ-600", "schemeAgencyId": "Customer" },
+      "name": "Gevaarlijk werk toeslag (rangeerzone)",
+      "origin": { "type": "CustomLabourAgreement" },
+      "typeCode": "HT600",
+      "line": [{
+        "lineId": { "value": "HZ600-1" },
+        "amount": { "value": 25, "unitCode": "Percentage", "baseAmount": { "unitCode": "HourlyRate", "baseType": "GrossSalary" }},
+        "interval": { "value": 1, "unitCode": "Hour" }
+      }]
+    }
+  ],
+  "supplementaryArrangement": [
+    {
+      "id": { "value": "SUP-COMM-103", "schemeAgencyId": "Customer" },
+      "name": "Reiskosten woon-werkverkeer",
+      "origin": { "type": "CustomLabourAgreement" },
+      "typeCode": "ERA",
+      "line": [{
+        "lineId": { "value": "COMM-1" },
+        "amount": { "value": 0.23, "unitCode": "Euro", "baseAmount": { "unitCode": "Fixed" }},
+        "interval": { "value": 1, "unitCode": "Kilometer" }
+      }]
+    },
+    {
+      "id": { "value": "SUP-WFH-801", "schemeAgencyId": "Customer" },
+      "name": "Thuiswerkvergoeding",
+      "origin": { "type": "CustomLabourAgreement" },
+      "typeCode": "ERA",
+      "line": [{
+        "lineId": { "value": "WFH-1" },
+        "amount": { "value": 2.35, "unitCode": "Euro", "baseAmount": { "unitCode": "Fixed" }},
+        "interval": { "value": 1, "unitCode": "WorkFromHomeDay" }
+      }]
+    }
+  ]
+}

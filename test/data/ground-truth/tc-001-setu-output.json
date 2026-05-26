@@ -1,0 +1,622 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TC-001 Ground Truth — SETU Inquiry Pay Equity v2.0",
+  "description": "Expected output for a basic Phase A employment contract at LogiFlex Distributie BV. Worker: Jan de Vries, Magazijnmedewerker (MAG-02), Functiegroep 4.",
+  "documentId": {
+    "value": "550e8400-e29b-41d4-a716-446655440001",
+    "schemeAgencyId": "Customer"
+  },
+  "versionId": {
+    "value": "v1.0"
+  },
+  "issued": "2026-01-15T10:30:00Z",
+  "effectivePeriod": {
+    "validFrom": "2026-01-15",
+    "validTo": "2027-12-31"
+  },
+  "customer": {
+    "id": [
+      {
+        "value": "67890123",
+        "schemeAgencyId": "Customer"
+      }
+    ],
+    "name": "LogiFlex Distributie BV",
+    "legalId": [
+      {
+        "value": "67890123",
+        "schemeAgencyId": "KvK"
+      }
+    ],
+    "personContacts": [
+      {
+        "name": {
+          "formattedName": "Lisa van den Berg"
+        },
+        "communication": {
+          "phone": [
+            {
+              "number": "+31102345678"
+            }
+          ],
+          "email": [
+            {
+              "address": "l.vandenberg@logiflex.nl",
+              "useCode": "Business"
+            }
+          ]
+        },
+        "roleCode": "HR Manager",
+        "positionTitle": "HR Manager"
+      }
+    ]
+  },
+  "labourAgreements": {
+    "industryIdentifier": [
+      {
+        "value": "52"
+      }
+    ],
+    "collectiveLabourAgreement": {
+      "name": "CAO voor Uitzendkrachten",
+      "id": {
+        "value": "ABU-CAO-2026-2028"
+      },
+      "effectivePeriod": {
+        "validFrom": "2026-01-01",
+        "validTo": "2028-12-31"
+      },
+      "basedOn": "membership"
+    },
+    "customLabourAgreement": false
+  },
+  "positionProfile": [
+    {
+      "positionId": {
+        "value": "MAG-02"
+      },
+      "positionTitle": "Magazijnmedewerker",
+      "origin": {
+        "type": "CollectiveLabourAgreement"
+      },
+      "referenceTitle": "Functiegroep 4 ABU",
+      "workDescription": "Orderpicken, goederenverwerking, voorraadbeheer, werken met handscanner en reachtruck."
+    }
+  ],
+  "remuneration": [
+    {
+      "origin": {
+        "type": "CollectiveLabourAgreement"
+      },
+      "effectivePeriod": {
+        "validFrom": "2026-01-01",
+        "validTo": "2027-12-31"
+      },
+      "workDuration": {
+        "amount": {
+          "value": 38,
+          "unitCode": "Hour"
+        },
+        "interval": {
+          "value": 1,
+          "unitCode": "Week"
+        },
+        "valuePerWeek": 38
+      },
+      "interval": {
+        "value": 1,
+        "unitCode": "Hour"
+      },
+      "hourlyWageConversion": {
+        "hourlyWageFactor": 173.33
+      },
+      "salaryScale": [
+        {
+          "name": "Schaal A — Magazijnmedewerker",
+          "minValue": 7.36,
+          "maxValue": 16.37,
+          "currency": "EUR",
+          "salaryStep": [
+            {
+              "name": "Trede 3 — Volwassen instap",
+              "value": 15.31,
+              "minimumWage": false,
+              "conditions": [
+                {
+                  "conditionType": "Age",
+                  "operator": "gte",
+                  "age": 21
+                }
+              ]
+            }
+          ],
+          "positionProfileReference": [
+            {
+              "positionId": {
+                "value": "MAG-02"
+              },
+              "startSalaryStep": "Trede 3"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "allowance": [
+    {
+      "id": {
+        "value": "2b497da74f7",
+        "schemeAgencyId": "Customer"
+      },
+      "name": "Overwerktoeslag",
+      "origin": {
+        "type": "CollectiveLabourAgreement"
+      },
+      "effectivePeriod": {
+        "validFrom": "2026-01-01",
+        "validTo": "2027-12-31"
+      },
+      "typeCode": "HT101",
+      "line": [
+        {
+          "lineId": {
+            "value": "OT-150"
+          },
+          "amount": {
+            "value": 150,
+            "unitCode": "Percentage",
+            "baseAmount": {
+              "unitCode": "HourlyRate",
+              "baseType": "GrossSalary"
+            }
+          },
+          "interval": {
+            "value": 1,
+            "unitCode": "Hour"
+          },
+          "conditions": [
+            {
+              "conditionType": "Text",
+              "description": "Voor uren boven 38 uur per week, maandag t/m zaterdag."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": {
+        "value": "3c598eb85g8",
+        "schemeAgencyId": "Customer"
+      },
+      "name": "Toeslag Onregelmatige Uren",
+      "origin": {
+        "type": "CollectiveLabourAgreement"
+      },
+      "effectivePeriod": {
+        "validFrom": "2026-01-01",
+        "validTo": "2027-12-31"
+      },
+      "typeCode": "HT201",
+      "period": [
+        {
+          "timePeriod": {
+            "start": "18:00:00",
+            "end": "06:00:00"
+          },
+          "weekday": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ]
+        }
+      ],
+      "line": [
+        {
+          "lineId": {
+            "value": "IR-35"
+          },
+          "amount": {
+            "value": 35,
+            "unitCode": "Percentage",
+            "baseAmount": {
+              "unitCode": "HourlyRate",
+              "baseType": "GrossSalary"
+            }
+          },
+          "interval": {
+            "value": 1,
+            "unitCode": "Hour"
+          }
+        }
+      ]
+    },
+    {
+      "id": {
+        "value": "4d609fc96i9",
+        "schemeAgencyId": "Customer"
+      },
+      "name": "Weekendtoeslag",
+      "origin": {
+        "type": "CollectiveLabourAgreement"
+      },
+      "effectivePeriod": {
+        "validFrom": "2026-01-01",
+        "validTo": "2027-12-31"
+      },
+      "typeCode": "HT321",
+      "period": [
+        {
+          "timePeriod": {
+            "start": "00:00:00",
+            "end": "23:59:59"
+          },
+          "weekday": [
+            "Saturday",
+            "Sunday"
+          ]
+        }
+      ],
+      "line": [
+        {
+          "lineId": {
+            "value": "WE-50"
+          },
+          "amount": {
+            "value": 50,
+            "unitCode": "Percentage",
+            "baseAmount": {
+              "unitCode": "HourlyRate",
+              "baseType": "GrossSalary"
+            }
+          },
+          "interval": {
+            "value": 1,
+            "unitCode": "Hour"
+          }
+        }
+      ]
+    }
+  ],
+  "holidayAllowance": [
+    {
+      "id": {
+        "value": "5e710gd07j0",
+        "schemeAgencyId": "Customer"
+      },
+      "name": "Vakantiebijslag",
+      "origin": {
+        "type": "CollectiveLabourAgreement"
+      },
+      "effectivePeriod": {
+        "validFrom": "2026-01-01",
+        "validTo": "2027-12-31"
+      },
+      "line": [
+        {
+          "lineId": {
+            "value": "HA-833"
+          },
+          "amount": {
+            "value": 8.33,
+            "unitCode": "Percentage",
+            "baseAmount": {
+              "unitCode": "YearlyRate",
+              "baseType": "GrossSalary"
+            }
+          },
+          "interval": {
+            "value": 1,
+            "unitCode": "Year"
+          }
+        }
+      ],
+      "payDate": {
+        "occurrenceType": "Recurring",
+        "recurringInterval": "R/2026-5/P1Y"
+      }
+    }
+  ],
+  "sickPay": [
+    {
+      "id": {
+        "value": "6f821he18k1",
+        "schemeAgencyId": "Customer"
+      },
+      "name": "Loondoorbetaling bij Ziekte",
+      "origin": {
+        "type": "CollectiveLabourAgreement"
+      },
+      "effectivePeriod": {
+        "validFrom": "2026-01-01",
+        "validTo": "2027-12-31"
+      },
+      "waitingDays": {
+        "value": 0,
+        "unitCode": "Day"
+      },
+      "line": [
+        {
+          "lineId": {
+            "value": "SP-100"
+          },
+          "amount": {
+            "value": 100,
+            "unitCode": "Percentage",
+            "baseAmount": {
+              "unitCode": "HourlyRate",
+              "baseType": "GrossSalary"
+            }
+          },
+          "interval": {
+            "value": 1,
+            "unitCode": "Month"
+          },
+          "conditions": [
+            {
+              "conditionType": "Occurrence",
+              "occurrence": {
+                "occurrenceType": "Relative",
+                "event": "SickLeave",
+                "offset": "P0D"
+              }
+            }
+          ]
+        },
+        {
+          "lineId": {
+            "value": "SP-70"
+          },
+          "amount": {
+            "value": 70,
+            "unitCode": "Percentage",
+            "baseAmount": {
+              "unitCode": "HourlyRate",
+              "baseType": "GrossSalary"
+            }
+          },
+          "interval": {
+            "value": 1,
+            "unitCode": "Month"
+          },
+          "conditions": [
+            {
+              "conditionType": "Occurrence",
+              "occurrence": {
+                "occurrenceType": "Relative",
+                "event": "SickLeave",
+                "offset": "P1Y"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "leave": [
+    {
+      "id": {
+        "value": "7g932if29l2",
+        "schemeAgencyId": "Customer"
+      },
+      "name": "Verlofregeling LogiFlex",
+      "origin": {
+        "type": "CollectiveLabourAgreement"
+      },
+      "effectivePeriod": {
+        "validFrom": "2026-01-01",
+        "validTo": "2027-12-31"
+      },
+      "paidLeave": [
+        {
+          "name": "Vakantiedagen",
+          "lineId": {
+            "value": "PL-25"
+          },
+          "amount": {
+            "value": 25,
+            "unitCode": "Day"
+          },
+          "interval": {
+            "value": 1,
+            "unitCode": "Year"
+          }
+        }
+      ],
+      "holidays": [
+        {
+          "name": "Feestdagen",
+          "lineId": {
+            "value": "PH-7"
+          },
+          "amount": {
+            "value": 7,
+            "unitCode": "Day"
+          },
+          "conditions": [
+            {
+              "conditionType": "Text",
+              "description": "Nieuwjaarsdag, Tweede Paasdag, Koningsdag, Hemelvaartsdag, Tweede Pinksterdag, Eerste Kerstdag, Tweede Kerstdag"
+            }
+          ]
+        }
+      ],
+      "specialLeave": [
+        {
+          "name": "Huwelijk",
+          "lineId": {
+            "value": "SL-MARRY"
+          },
+          "amount": {
+            "value": 2,
+            "unitCode": "Day"
+          }
+        },
+        {
+          "name": "Overlijden",
+          "lineId": {
+            "value": "SL-BER"
+          },
+          "amount": {
+            "value": 4,
+            "unitCode": "Day"
+          }
+        },
+        {
+          "name": "Verhuizing",
+          "lineId": {
+            "value": "SL-MOVE"
+          },
+          "amount": {
+            "value": 1,
+            "unitCode": "Day"
+          }
+        }
+      ],
+      "additionalParentalLeave": [
+        {
+          "name": "Aanvullend Geboorteverlof",
+          "lineId": {
+            "value": "PL-BIRTH"
+          },
+          "amount": {
+            "value": 5,
+            "unitCode": "Day"
+          }
+        }
+      ]
+    }
+  ],
+  "individualChoiceBudget": [
+    {
+      "id": {
+        "value": "8h043jg30m3",
+        "schemeAgencyId": "Customer"
+      },
+      "name": "IKB (niet van toepassing)",
+      "origin": {
+        "type": "CustomLabourAgreement"
+      },
+      "line": [
+        {
+          "lineId": {
+            "value": "IKB-NONE"
+          },
+          "amount": {
+            "value": 0,
+            "unitCode": "Percentage",
+            "baseAmount": {
+              "unitCode": "Fixed"
+            }
+          },
+          "interval": {
+            "value": 1,
+            "unitCode": "Year"
+          },
+          "ikbReference": [
+            {
+              "relationType": "None",
+              "id": {
+                "value": "IKB-NONE"
+              },
+              "description": "Opdrachtgever biedt geen IKB-regeling aan."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "pension": [
+    {
+      "id": {
+        "value": "9i154kh41n4",
+        "schemeAgencyId": "Customer"
+      },
+      "name": "StiPP Pensioenregeling 2026",
+      "origin": {
+        "type": "CollectiveLabourAgreement"
+      },
+      "effectivePeriod": {
+        "validFrom": "2026-01-01",
+        "validTo": "2027-12-31"
+      },
+      "line": [
+        {
+          "lineId": {
+            "value": "PEN-ER"
+          },
+          "amount": {
+            "value": 15.9,
+            "unitCode": "Percentage",
+            "baseAmount": {
+              "unitCode": "HourlyRate",
+              "baseType": "GrossSalary"
+            },
+            "proportional": {
+              "partTimePercentage": true,
+              "employmentDuration": false
+            }
+          },
+          "contributionSource": "Employer"
+        },
+        {
+          "lineId": {
+            "value": "PEN-EE"
+          },
+          "amount": {
+            "value": 7.5,
+            "unitCode": "Percentage",
+            "baseAmount": {
+              "unitCode": "HourlyRate",
+              "baseType": "GrossSalary"
+            },
+            "proportional": {
+              "partTimePercentage": true,
+              "employmentDuration": false
+            }
+          },
+          "contributionSource": "Employee"
+        }
+      ],
+      "franchise": {
+        "description": "Franchise per uur: € 9,24 (2026). Maximum pensioengevend uurloon: € 42,42 (2026)."
+      }
+    }
+  ],
+  "sustainableEmployability": [
+    {
+      "id": {
+        "value": "0j265li52o5",
+        "schemeAgencyId": "Customer"
+      },
+      "name": "Opleidingsbudget",
+      "origin": {
+        "type": "CustomLabourAgreement"
+      },
+      "effectivePeriod": {
+        "validFrom": "2026-01-01",
+        "validTo": "2027-12-31"
+      },
+      "typeCode": "Education",
+      "line": [
+        {
+          "lineId": {
+            "value": "EDU-500"
+          },
+          "amount": {
+            "value": 500,
+            "unitCode": "Euro",
+            "baseAmount": {
+              "unitCode": "Fixed"
+            }
+          },
+          "interval": {
+            "value": 1,
+            "unitCode": "Year"
+          }
+        }
+      ]
+    }
+  ]
+}

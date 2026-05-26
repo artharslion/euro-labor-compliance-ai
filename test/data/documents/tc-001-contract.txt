@@ -1,0 +1,167 @@
+====================================================================
+ARBEIDSOVEREENKOMST UITZENDKRACHT
+Temporary Employment Contract — Phase A
+====================================================================
+
+Document ID: TC-001
+Language: nl-NL
+Effective Date: 2026-01-15
+
+--------------------------------------------------------------------
+PARTIJEN (Parties)
+--------------------------------------------------------------------
+
+Opdrachtgever (Staffing Customer / Hirer):
+  Naam: LogiFlex Distributie BV
+  Adres: Havenstraat 42, 3047 AC Rotterdam
+  KvK-nummer: 67890123
+  Contactpersoon: Mevrouw Lisa van den Berg
+  Functie: HR Manager
+  Telefoon: +31 10 234 5678
+  E-mail: l.vandenberg@logiflex.nl
+
+Uitzendbureau (Staffing Supplier):
+  Naam: Tempo-Team Uitzenden BV
+  Adres: Zuidelijke Havenweg 10, 3024 EA Rotterdam
+  KvK-nummer: 34216000
+  Contactpersoon: De heer Mark Jansen
+  E-mail: m.jansen@tempoteam.nl
+
+Uitzendkracht (Temporary Worker):
+  Naam: Jan de Vries
+  Geboortedatum: 1995-03-15
+  BSN: 1234.56.789
+  Adres: Dorpsstraat 12, 3051 AB Rotterdam
+  Nationaliteit: Nederlands
+
+--------------------------------------------------------------------
+FUNCTIE (Position)
+--------------------------------------------------------------------
+
+Functietitel: Magazijnmedewerker (Warehouse Worker)
+Functiegroep (ABU CAO): 4
+Referentie functieprofiel inlener: MAG-02
+Werkzaamheden: Orderpicken, goederenverwerking, voorraadbeheer
+Locatie: LogiFlex DC Rotterdam, Havenstraat 42
+
+--------------------------------------------------------------------
+BELONING (Remuneration)
+--------------------------------------------------------------------
+
+Volgens de ABU CAO voor Uitzendkrachten 2026-2028 (gelijkwaardige beloning).
+
+Artikel 1 — Bruto Uurloon:
+  Functiegroep 4: € 15,31 per uur (bruto)
+  Dit is het startsalaris conform de CAO-tabel.
+
+Artikel 2 — Periodieke Verhoging:
+  Jaarlijks per 1 januari: 2,25% van het feitelijk brutoloon.
+
+Artikel 3 — Normale Arbeidsduur:
+  De normale arbeidsduur bedraagt 38 uur per week.
+  Deeltijdpercentage: 100% (fulltime).
+
+Artikel 4 — Uurloonconversie:
+  Voor de berekening van het uurloon uit een maandsalaris wordt
+  de factor 173,33 gehanteerd (bij 38-urige werkweek).
+
+--------------------------------------------------------------------
+TOESLAGEN (Allowances)
+--------------------------------------------------------------------
+
+Artikel 5 — Overwerktoeslag (Overtime Surcharge):
+  Overuren boven de 38 uur per week worden gecompenseerd met
+  150% van het basis-uurloon.
+  Basis voor berekening: bruto uurloon.
+  Type: Overwerktoeslag (HT100).
+
+Artikel 6 — Toeslag Onregelmatige Uren (Irregular Hours):
+  Voor werkzaamheden tussen 18:00 uur en 06:00 uur geldt een
+  toeslag van 35% op het basis-uurloon.
+  Type: Toeslag onregelmatige uren (HT200).
+
+Artikel 7 — Weekendtoeslag (Weekend Surcharge):
+  Voor werkzaamheden op zaterdag en zondag geldt een toeslag
+  van 50% op het basis-uurloon.
+  Type: Weekendtoeslag (HT321).
+  Geldig: zaterdag 00:00 tot zondag 23:59.
+
+--------------------------------------------------------------------
+VAKANTIE & VERLOF (Holiday & Leave)
+--------------------------------------------------------------------
+
+Artikel 8 — Vakantiedagen:
+  De uitzendkracht heeft recht op 25 vakantiedagen per jaar
+  (bij fulltime dienstverband van 38 uur per week).
+  Opbouw: 0,0096 vakantiedagen per gewerkt uur.
+  Wettelijk minimum: 20 dagen; bovenwettelijk: 5 dagen.
+
+Artikel 9 — Vakantiebijslag (Holiday Allowance):
+  8,33% van het bruto jaarsalaris.
+  Wordt jaarlijks uitbetaald in de maand mei.
+  Basis voor berekening: bruto jaarloon.
+
+Artikel 10 — Feestdagen (Public Holidays):
+  Erkende feestdagen: 7 dagen per jaar.
+  Nieuwjaarsdag, Tweede Paasdag, Koningsdag (27 april),
+  Bevrijdingsdag (5 mei, lustrumjaar), Hemelvaartsdag,
+  Tweede Pinksterdag, Eerste Kerstdag, Tweede Kerstdag.
+
+Artikel 11 — Bijzonder Verlof (Special Leave):
+  Huwelijk werknemer: 2 dagen doorbetaald.
+  Overlijden partner/kind/ouder: 4 dagen doorbetaald.
+  Verhuizing: 1 dag doorbetaald.
+
+--------------------------------------------------------------------
+ZIEKTE (Sickness)
+--------------------------------------------------------------------
+
+Artikel 12 — Loondoorbetaling bij Ziekte:
+  Eerste jaar: 100% van het brutoloon.
+  Tweede jaar: 70% van het brutoloon.
+  Wachtdagen: 0 (geen wachtdagen).
+
+--------------------------------------------------------------------
+PENSIOEN (Pension)
+--------------------------------------------------------------------
+
+Artikel 13 — Pensioenregeling StiPP (2026):
+  Uitvoerder: Stichting Pensioenfonds voor Personeelsdiensten (StiPP)
+  Premie totaal: 23,4%
+  Werkgeversdeel: 15,9%
+  Werknemersdeel: 7,5%
+  Franchise per uur: € 9,24 (2026)
+  Maximum pensioengevend uurloon: € 42,42 (2026)
+  Deelname: vanaf 18 jaar, vanaf eerste werkdag.
+
+--------------------------------------------------------------------
+IKB (Individueel Keuze Budget)
+--------------------------------------------------------------------
+
+Artikel 14 — Individueel Keuze Budget:
+  De opdrachtgever biedt geen IKB-regeling aan.
+  IKB-relatie: None (niet van toepassing).
+
+--------------------------------------------------------------------
+DUURZAME INZETBAARHEID (Sustainable Employability)
+--------------------------------------------------------------------
+
+Artikel 15 — Opleidingsbudget:
+  Jaarlijks opleidingsbudget: € 500 per medewerker.
+  Besteedbaar aan: vakgerichte opleidingen, veiligheidstrainingen,
+  taalcursussen Nederlands.
+
+--------------------------------------------------------------------
+ONDERTEKENING
+--------------------------------------------------------------------
+
+Plaats: Rotterdam
+Datum: 15 januari 2026
+
+Handtekening uitzendkracht:     _________________________  Jan de Vries
+
+Handtekening uitzendbureau:     _________________________  Mark Jansen
+
+====================================================================
+EINDE ARBEIDSOVEREENKOMST
+====================================================================
