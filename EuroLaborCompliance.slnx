@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/EuroLaborCompliance.Cli/EuroLaborCompliance.Cli.csproj" />
+    <Project Path="src/EuroLaborCompliance.Pipeline/EuroLaborCompliance.Pipeline.csproj" />
+  </Folder>
+</Solution>
