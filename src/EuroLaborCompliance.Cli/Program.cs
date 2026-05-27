@@ -29,7 +29,16 @@ var apiKey = Environment.GetEnvironmentVariable("OPENCODE_GO_API_KEY", Environme
           ?? throw new InvalidOperationException("OPENCODE_GO_API_KEY not set");
 
 Console.WriteLine($"[1/4] OCR: {Path.GetFileName(docPath)} ({new FileInfo(docPath).Length / 1024} KB)");
-var ocr = new HuggingFaceOcrService();
+
+// Select OCR engine: DeepSeek OCR 2 if available, else dual-extract
+var ds2Url = Environment.GetEnvironmentVariable("DEEPSEEK_OCR2_URL", EnvironmentVariableTarget.Process)
+          ?? Environment.GetEnvironmentVariable("DEEPSEEK_OCR2_URL", EnvironmentVariableTarget.User)
+          ?? Environment.GetEnvironmentVariable("DEEPSEEK_OCR2_URL", EnvironmentVariableTarget.Machine);
+IOcrService ocr = !string.IsNullOrEmpty(ds2Url)
+    ? new DeepSeekOcr2Service(ds2Url)
+    : new HuggingFaceOcrService();
+
+Console.WriteLine($"       Engine: {(ocr is DeepSeekOcr2Service ? "DeepSeek-OCR-2" : "DualExtract")}");
 var mapper = new LlmMapper(apiKey);
 
 var pipeline = new CompliancePipeline(ocr, mapper);
