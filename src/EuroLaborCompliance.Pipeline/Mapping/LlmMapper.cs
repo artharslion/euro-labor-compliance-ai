@@ -20,7 +20,7 @@ public class LlmMapper : IMapper
 
     public LlmMapper(string apiKey, HttpClient? http = null)
     {
-        _http = http ?? new HttpClient { Timeout = TimeSpan.FromMinutes(3) };
+        _http = http ?? new HttpClient { Timeout = TimeSpan.FromMinutes(8) };
         _http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
         _http.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
     }
@@ -113,7 +113,11 @@ public class LlmMapper : IMapper
 
     private static string BuildPrompt(string markdown)
     {
-        var truncated = markdown.Length > 30000 ? markdown[..30000] + "\n\n[TRUNCATED]" : markdown;
+        // Prioritize extracted tables section, reduce full text
+        var tableIdx = markdown.IndexOf("## EXTRACTED TABLES");
+        var tables = tableIdx > 0 ? "\n\n" + markdown[tableIdx..] : "";
+        var textLimit = tableIdx > 0 ? Math.Min(tableIdx, 20000) : Math.Min(markdown.Length, 80000);
+        var truncated = markdown[..textLimit] + tables;
 
         return SystemPrompt + "\n\n" + """
             Extract ALL employment and remuneration data from the following Dutch labor document.
@@ -188,6 +192,15 @@ public class LlmMapper : IMapper
 
             DOCUMENT TEXT:
             """ + truncated + """
+
+            IMPORTANT: This document may contain raw text and/or fragmented table data.
+            Tables extracted from PDF may have misaligned columns, merged cells, or
+            partial data. Reconstruct the logical structure from context. For example:
+            - If numbers appear in a row like "0 6.50 8.20 11.50", they represent salary steps
+            - Column headers like "<18 jaar, 18-20 jaar, 21+ jaar" indicate age-conditioned rates
+            - Row labels like "Trede 0, Trede 5" are salary step identifiers
+            - Use the EXTRACTED TABLES section as your primary source for structured data
+            - Cross-reference with the full text for context (e.g., which CAO article)
 
             Output ONLY valid JSON, no markdown fences, no explanations.
             """;

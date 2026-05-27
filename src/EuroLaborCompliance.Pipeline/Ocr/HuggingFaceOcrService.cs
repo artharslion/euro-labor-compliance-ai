@@ -19,100 +19,87 @@ public class HuggingFaceOcrService : IOcrService
         var sw = Stopwatch.StartNew();
         var ext = Path.GetExtension(filePath).ToLowerInvariant();
 
-        // Try HuggingFace inference first (no auth for public models)
         try
         {
             using var content = new MultipartFormDataContent();
             var fileBytes = await File.ReadAllBytesAsync(filePath);
             var fileContent = new ByteArrayContent(fileBytes);
-            fileContent.Headers.ContentType = new MediaTypeHeaderValue(
-                ext == ".pdf" ? "application/pdf" : "image/png");
+            fileContent.Headers.ContentType = new MediaTypeHeaderValue(ext == ".pdf" ? "application/pdf" : "image/png");
             content.Add(fileContent, "file", Path.GetFileName(filePath));
-
             var response = await _http.PostAsync(HfInferenceUrl, content);
             if (response.IsSuccessStatusCode)
             {
                 var json = await response.Content.ReadAsStringAsync();
                 var doc = JsonDocument.Parse(json);
-                var text = ExtractTextFromHfResponse(doc.RootElement);
-
-                return new OcrResult(
-                    Path.GetFileName(filePath), text, text, "HuggingFace-DeepSeek-OCR",
-                    PageCount(text), sw.Elapsed.TotalSeconds
-                );
+                var text = HfText(doc.RootElement);
+                return new OcrResult(Path.GetFileName(filePath), text, text, "HuggingFace", Pages(text), sw.Elapsed.TotalSeconds);
             }
         }
-        catch { /* fall through to Python subprocess */ }
+        catch { }
 
-        // Fallback: Python deepseek-ocr package
-        return await PythonDeepSeekOcrAsync(filePath, sw);
+        return await DualExtractAsync(filePath, sw);
     }
 
-    private async Task<OcrResult> PythonDeepSeekOcrAsync(string filePath, Stopwatch sw)
+    private async Task<OcrResult> DualExtractAsync(string filePath, Stopwatch sw)
     {
-        var tempDir = Path.Combine(Path.GetTempPath(), "setu-ocr");
-        Directory.CreateDirectory(tempDir);
-        var outputPath = Path.Combine(tempDir, $"{Path.GetFileNameWithoutExtension(filePath)}.md");
+        var tmp = Path.Combine(Path.GetTempPath(), "setu-ocr");
+        Directory.CreateDirectory(tmp);
+        var outPath = Path.Combine(tmp, $"{Path.GetFileNameWithoutExtension(filePath)}.md");
+        var scriptPath = FindScript();
 
-        // Use pymupdf for text + table extraction (free, no API key)
         var psi = new ProcessStartInfo
         {
             FileName = @"C:\Users\zhixi\AppData\Local\Python\bin\python3.exe",
-            Arguments = $"-c \"import fitz,json; doc=fitz.open(r'{filePath}'); pages=[]; tables=[]; [pages.append(f'## Page {{i+1}}\\n\\n{{page.get_text()}}\\n') for i,page in enumerate(doc)]; [(tables.append(f'## Table on Page {{i+1}}\\n{{t.to_markdown()}}\\n'),None) for i,page in enumerate(doc) for t in page.find_tables().tables]; all_text='\\n'.join(pages); table_text='\\n'.join(tables); full=f'{{all_text}}\\n\\n### EXTRACTED TABLES ###\\n{{table_text}}'; open(r'{outputPath}','w',encoding='utf-8').write(full)\"",
-            RedirectStandardOutput = true,
-            RedirectStandardError = true,
-            UseShellExecute = false,
-            CreateNoWindow = true
+            Arguments = $@"""{scriptPath}"" ""{filePath}"" ""{outPath}"" 0 80000",
+            RedirectStandardOutput = true, RedirectStandardError = true,
+            UseShellExecute = false, CreateNoWindow = true
         };
 
         try
         {
-            using var process = Process.Start(psi)!;
+            using var proc = Process.Start(psi)!;
             var cts = new CancellationTokenSource(TimeSpan.FromMinutes(5));
-            await process.WaitForExitAsync(cts.Token);
-            var error = await process.StandardError.ReadToEndAsync();
+            await proc.WaitForExitAsync(cts.Token);
+            var stdout = await proc.StandardOutput.ReadToEndAsync();
+            var stderr = await proc.StandardError.ReadToEndAsync();
 
-            if (File.Exists(outputPath) && new FileInfo(outputPath).Length > 100)
+            if (File.Exists(outPath) && new FileInfo(outPath).Length > 100)
             {
-                var markdown = await File.ReadAllTextAsync(outputPath);
-                return new OcrResult(
-                    Path.GetFileName(filePath), markdown, markdown,
-                    "PyMuPDF-OCR", PageCount(markdown), sw.Elapsed.TotalSeconds
-                );
+                var md = await File.ReadAllTextAsync(outPath);
+                int pages = 1;
+                try { var j = JsonDocument.Parse(stdout); pages = int.Parse(j.RootElement.GetProperty("pages_processed").GetInt32().ToString()); }
+                catch { pages = md.Split("\n## Page").Length; }
+                return new OcrResult(Path.GetFileName(filePath), md, md, "DualExtract", pages, sw.Elapsed.TotalSeconds);
             }
 
-            if (!string.IsNullOrWhiteSpace(error))
-            {
-                var shortError = error.Length > 300 ? error[..300] : error;
-                throw new Exception($"Python OCR failed: {shortError}");
-            }
+            if (!string.IsNullOrWhiteSpace(stderr))
+                throw new Exception(stderr.Length > 300 ? stderr[..300] : stderr);
         }
-        catch (Exception ex)
-        {
-            throw new Exception($"All OCR backends failed for {filePath}. Last error: {ex.Message}");
-        }
+        catch (Exception ex) { throw new Exception($"OCR failed: {ex.Message}"); }
 
-        throw new Exception($"OCR produced no output for {filePath}");
+        throw new Exception("OCR produced no output");
     }
 
-    private static string ExtractTextFromHfResponse(JsonElement root)
+    private static string HfText(JsonElement root)
     {
-        // HF inference returns different formats depending on model
         if (root.ValueKind == JsonValueKind.Array && root.GetArrayLength() > 0)
         {
-            var first = root[0];
-            if (first.TryGetProperty("generated_text", out var gt))
-                return gt.GetString() ?? "";
-            if (first.TryGetProperty("summary_text", out var st))
-                return st.GetString() ?? "";
+            var f = root[0];
+            if (f.TryGetProperty("generated_text", out var g)) return g.GetString() ?? "";
+            if (f.TryGetProperty("summary_text", out var s)) return s.GetString() ?? "";
         }
-        if (root.TryGetProperty("generated_text", out var g))
-            return g.GetString() ?? "";
-        if (root.TryGetProperty("text", out var t))
-            return t.GetString() ?? "";
+        if (root.TryGetProperty("generated_text", out var gt)) return gt.GetString() ?? "";
+        if (root.TryGetProperty("text", out var t)) return t.GetString() ?? "";
         return root.ToString();
     }
 
-    private static int PageCount(string text) =>
-        text.Split("\n---\n", StringSplitOptions.None).Length;
+    private static string FindScript()
+    {
+        var d = new DirectoryInfo(AppContext.BaseDirectory);
+        while (d != null && !File.Exists(Path.Combine(d.FullName, "test", "dual_extract.py"))) d = d.Parent;
+        return d != null ? Path.Combine(d.FullName, "test", "dual_extract.py") :
+            Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "test", "dual_extract.py");
+    }
+
+    private static int Pages(string t) => t.Split("\n## Page").Length;
 }
