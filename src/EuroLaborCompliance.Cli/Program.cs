@@ -6,10 +6,15 @@ var testDir = FindTestDir();
 var docsDir = Path.Combine(testDir, "data", "documents");
 var gtPath = Path.Combine(testDir, "data", "ground-truth", "tc-001-setu-output.json");
 
-var pdf = Directory.GetFiles(docsDir, "*.pdf")
-    .OrderBy(f => f.Contains("2026") ? 0 : 1)
-    .FirstOrDefault();
-var docPath = pdf ?? Path.Combine(docsDir, "tc-001-contract.txt");
+var pdf = args.Length > 0 ? args[0]
+    : Directory.GetFiles(docsDir, "test-*.pdf")
+        .OrderBy(f => f)
+        .FirstOrDefault()
+    ?? Directory.GetFiles(docsDir, "*.pdf")
+        .OrderBy(f => f.Contains("2026") ? 1 : 0)
+        .FirstOrDefault();
+var docPath = File.Exists(pdf) ? pdf
+    : Path.Combine(docsDir, "tc-001-contract.txt");
 
 Console.WriteLine("Euro Labor Compliance AI — LLM Pipeline");
 Console.WriteLine("=======================================");

@@ -54,11 +54,11 @@ public class HuggingFaceOcrService : IOcrService
         Directory.CreateDirectory(tempDir);
         var outputPath = Path.Combine(tempDir, $"{Path.GetFileNameWithoutExtension(filePath)}.md");
 
-        // Use pymupdf for text extraction + markdown conversion (free, no API key)
+        // Use pymupdf for text + table extraction (free, no API key)
         var psi = new ProcessStartInfo
         {
             FileName = @"C:\Users\zhixi\AppData\Local\Python\bin\python3.exe",
-            Arguments = $"-c \"import fitz; doc=fitz.open(r'{filePath}'); pages=[]; [pages.append(f'## Page {{i+1}}\\n\\n{{page.get_text()}}\\n') for i,page in enumerate(doc)]; open(r'{outputPath}','w',encoding='utf-8').write('\\n'.join(pages))\"",
+            Arguments = $"-c \"import fitz,json; doc=fitz.open(r'{filePath}'); pages=[]; tables=[]; [pages.append(f'## Page {{i+1}}\\n\\n{{page.get_text()}}\\n') for i,page in enumerate(doc)]; [(tables.append(f'## Table on Page {{i+1}}\\n{{t.to_markdown()}}\\n'),None) for i,page in enumerate(doc) for t in page.find_tables().tables]; all_text='\\n'.join(pages); table_text='\\n'.join(tables); full=f'{{all_text}}\\n\\n### EXTRACTED TABLES ###\\n{{table_text}}'; open(r'{outputPath}','w',encoding='utf-8').write(full)\"",
             RedirectStandardOutput = true,
             RedirectStandardError = true,
             UseShellExecute = false,
