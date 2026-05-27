@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EuroLaborCompliance.Pipeline")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f5811ac8628ae8f8c7f402d02f0b58f0b3d48209")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+be53d3e916da519fd93fbd6ac1360c2f54850497")]
 [assembly: System.Reflection.AssemblyProductAttribute("EuroLaborCompliance.Pipeline")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EuroLaborCompliance.Pipeline")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

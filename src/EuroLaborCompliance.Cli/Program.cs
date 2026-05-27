@@ -18,8 +18,10 @@ Console.WriteLine();
 if (!File.Exists(docPath)) { Console.WriteLine($"[ERROR] File not found: {docPath}"); return 1; }
 
 // API key from environment or inline
-var apiKey = Environment.GetEnvironmentVariable("OPENCODE_GO_API_KEY")
-          ?? "sk-eUJaZOpEOETTGqklFL1IvLmeOc6FmLCMlWSJMouUKJqJCsVqMPVeLRZegGbaq0DH";
+var apiKey = Environment.GetEnvironmentVariable("OPENCODE_GO_API_KEY", EnvironmentVariableTarget.Process)
+          ?? Environment.GetEnvironmentVariable("OPENCODE_GO_API_KEY", EnvironmentVariableTarget.User)
+          ?? Environment.GetEnvironmentVariable("OPENCODE_GO_API_KEY", EnvironmentVariableTarget.Machine)
+          ?? throw new InvalidOperationException("OPENCODE_GO_API_KEY not set");
 
 Console.WriteLine($"[1/4] OCR: {Path.GetFileName(docPath)} ({new FileInfo(docPath).Length / 1024} KB)");
 var ocr = new HuggingFaceOcrService();

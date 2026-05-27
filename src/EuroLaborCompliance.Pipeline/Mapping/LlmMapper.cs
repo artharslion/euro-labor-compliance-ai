@@ -11,7 +11,7 @@ public class LlmMapper : IMapper
 {
     private readonly HttpClient _http;
     private const string ApiUrl = "https://opencode.ai/zen/go/v1/chat/completions";
-    private const string Model = "kimi-k2.6";
+    private const string Model = "deepseek-v4-pro";
     private static readonly JsonSerializerOptions JsonOpts = new()
     {
         PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
@@ -40,7 +40,7 @@ public class LlmMapper : IMapper
                     new { role = "system", content = SystemPrompt },
                     new { role = "user", content = prompt }
                 },
-                max_tokens = 8192,
+                max_tokens = 16384,
                 temperature = 0.1
             };
 
@@ -116,34 +116,75 @@ public class LlmMapper : IMapper
         var truncated = markdown.Length > 30000 ? markdown[..30000] + "\n\n[TRUNCATED]" : markdown;
 
         return SystemPrompt + "\n\n" + """
-            Extract all employment and remuneration data from the following Dutch labor document text.
-            Output a complete SETU InquiryPayEquity JSON object.
+            Extract ALL employment and remuneration data from the following Dutch labor document.
+            Output a complete SETU InquiryPayEquity v2.0 JSON object with ALL available fields.
 
-            Required fields in output JSON:
-            - documentId
-            - customer: Party with name, legalId (KvK number), personContacts (name, email, phone)
-            - remuneration: salary scales with workDuration, hourlyWageConversion, salarySteps
-            - allowance: all allowances (overtime, shift, weekend, holiday, irregular hours) with typeCode and rate %
-            - holidayAllowance: percentage (typically 8.33%)
-            - sickPay: tiered rates (e.g., 100pct year 1, 70pct year 2) with waiting days
-            - leave: paidLeave days, holidays, specialLeave
-            - pension: employer and employee contribution rates
-            - individualChoiceBudget: IKB scheme if present
-            - sustainableEmployability: training budget
+            TOP-LEVEL REQUIRED FIELDS:
+            - documentId: {"value":"auto","schemeAgencyId":"Customer"}
+            - effectivePeriod: {"validFrom":"2026-01-01","validTo":"2027-12-31"}
+            - customer: {name, legalId:[{value, schemeAgencyId:"KvK"}], personContacts:[{name, communication:{email:[{address, useCode}], phone:[{number}]}, roleCode, positionTitle}]}
 
-            For allowances, infer the correct AllowanceCode:
-            - Overtime Mon-Sat = HT101, Sunday = HT102
-            - Irregular hours = HT200 or HT201
-            - Weekend = HT321, Saturday = HT322, Sunday = HT330
-            - Night shift = HT340
-            - Holiday = HT331
-            - Hazard/danger = HT600
-            - Commuting = EA103, Home office = EA801
+            COMPLETE FIELD LIST (include ALL that you find in the document):
 
-            Amount structure: value=numeric, unitCode="Percentage"|"Euro"|"Day",
-            baseAmount with unitCode="HourlyRate"|"MonthlyRate"|"Fixed" and baseType="GrossSalary"
+            1. remuneration[] — salary packages. For EACH:
+               - origin: {"type":"CollectiveLabourAgreement"}
+               - workDuration: {amount:{value, unitCode:"Hour"}, interval:{value, unitCode:"Week"}, valuePerWeek}
+               - hourlyWageConversion: {hourlyWageFactor:173.33, hourlyWagePercentage:0.607}
+               - salaryScale[] — FULL salary table with ALL steps:
+                 - name, minValue, maxValue, currency:"EUR"
+                 - salaryStep[]: EACH with {name, value, minimumWage:false, conditions:[...]}
+                 - positionProfileReference:[{positionId, startSalaryStep}]
+               - individualSalaryIncrease[]: {effectiveDate, line:{amount:{value,unitCode:"Percentage",baseAmount:{unitCode:"HourlyRate",baseType:"GrossSalary"}}}}
+               - generalSalaryIncrease[]: {effectiveDate, line:{amount:{value,unitCode:"Percentage"...}}}
+               - conditions[]: when this package applies
 
-            If a field is not found in the document, omit it. Do NOT guess values.
+            2. positionProfile[] — job functions:
+               - positionId, positionTitle, origin, referenceTitle, workDescription
+
+            3. allowance[] — ALL surcharges and compensations. For EACH:
+               - id, name, origin, typeCode (from list below)
+               - period[]: {datePeriod:[{start,end}], timePeriod:{start,end}, weekday:[...]}
+               - line[]: {lineId, amount:{value,unitCode,baseAmount:{unitCode,baseType}}, interval:{value,unitCode}, conditions:[...]}
+               - payDate, description
+
+            4. holidayAllowance[]:
+               - line: {amount:{value:8.33,unitCode:"Percentage",baseAmount:{unitCode:"YearlyRate",baseType:"GrossSalary"}}}
+               - payDate
+
+            5. sickPay[]:
+               - waitingDays:{value,unitCode:"Day"}
+               - line[]: EACH tier {amount:{value,unitCode:"Percentage",baseAmount:{...}}, interval, conditions:[{conditionType:"Occurrence",occurrence:{occurrenceType:"Relative",event:"SickLeave",offset:"P0D"}}]}
+
+            6. leave[] — ALL leave types:
+               - paidLeave[]: {name, lineId, amount:{value,unitCode:"Day"}, interval:{value:1,unitCode:"Year"}}
+               - holidays[]: {name, lineId, amount:{value,unitCode:"Day"}}
+               - specialLeave[]: {name, lineId, amount:{value,unitCode:"Day"}}
+               - additionalParentalLeave[]: {name, lineId, amount:{value,unitCode:"Day"}}
+
+            7. pension[]:
+               - line[]: EACH {lineId,amount:{value,unitCode:"Percentage",baseAmount:{unitCode:"HourlyRate",baseType:"GrossSalary"}},contributionSource:{type:"Employer"|"Employee"}}
+               - franchise:{description:"Franchise per hour: E9.24"}
+
+            8. individualChoiceBudget[]: {id, name, origin, line[]}
+            9. sustainableEmployability[]: {id, name, origin, typeCode:"Education", line:[{amount:{value,unitCode:"Euro",baseAmount:{unitCode:"Fixed"}}, interval:{value:1,unitCode:"Year"}}]}
+            10. supplementaryArrangement[]: {id, name, origin, typeCode, line[], description}
+            11. baseDefinition[]: {baseType:"GrossSalary", remunerationIndicator:true, holidayAllowanceIndicator:true, paidLeaveDayIndicator:true, allAllowancesIndicator:true}
+            12. labourAgreements: {industryIdentifier:[{value}], collectiveLabourAgreement:{name,id:{value},typeCode:"CollectiveLabourAgreement"}, customLabourAgreement:false}
+
+            ALLOWANCE CODE REFERENCE:
+            Overtime: HT100(mon-sat), HT102(sunday) | Irregular hours: HT200, HT201 | Weekend: HT321, Sat:HT322, Sun:HT330
+            Night: HT340 | Holiday: HT331 | Shift: HT300, HT301, HT302 | Hazard: HT600
+            Commuting: EA103 | Home office: EA801 | Internet: EA606 | Phone: EA605
+
+            CONDITION TYPES for salary steps and allowances:
+            - Age: {conditionType:"Age", operator:"gte"|"lte"|"eq", age:number}
+            - EmploymentDuration: {conditionType:"EmploymentDuration", operator:"gte", duration:"P1Y", referenceDateType:"HireDate"}
+            - PositionProfile: {conditionType:"PositionProfile", operator:"in", positionProfileIds:[...]}
+            - AllOf: {conditionType:"AllOf", conditions:[...]}
+            - Text: {conditionType:"Text", description:"..."}
+
+            NUMERIC VALUES: Extract exact numbers from the document. Use commas for Dutch decimal notation (15,31 → 15.31).
+            If a field is not found, OMIT it entirely. Do NOT invent values.
 
             DOCUMENT TEXT:
             """ + truncated + """
