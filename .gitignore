@@ -1,3 +1,26 @@
+# Build output
+bin/
+obj/
 output/
+
+# IDE
 *.suo
 *.user
+*.vs/
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Temp
+*.tmp
+*.temp
